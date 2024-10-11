@@ -37,32 +37,7 @@ Anyway, sana makapasa na tayo.
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: PHP
 - **Database**: MySQL
-- **Frameworks/Libraries**: (List any libraries or frameworks you used, e.g., jQuery, Bootstrap)
 
-## Installation
-To set up the project locally, follow these steps:
 
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/yourusername/RideReservationSystem.git
-    cd RideReservationSystem
-    ```
-
-2. **Set up the database**:
-   - Import the provided SQL schema into your MySQL database.
-   - Update the database connection settings in `config.php` located in the `/admin/includes` directory.
-
-3. **Start a local server**:
-   - You can use tools like XAMPP, MAMP, or any other PHP server.
-
-4. **Access the application**:
-   - Open your browser and go to `http://localhost/RideReservationSystem/admin/index.php` for admin functionalities.
-   - Access manager functionalities via `http://localhost/RideReservationSystem/manager/index.html`.
-   - Access passenger functionalities via `http://localhost/RideReservationSystem/passenger/index.html`.
-
-## Usage
-- **Admin Panel**: Use this to manage users and perform system maintenance.
-- **Manager Panel**: Log in to manage rides, view statistics, and handle blacklists.
-- **Passenger Mobile UI**: Log in to reserve rides and check wait times.
 
 
