@@ -1,4 +1,4 @@
-# GoGora Ride Reservation System 
+# GoGora 
 
 ## Overview
 GoGora is a web application designed for managing and reserving rides, primarily targeting passengers, managers, and administrators.
