@@ -13,7 +13,7 @@ Anyway, sana makapasa na tayo.
 - [Usage](#usage)
 - [File Structure](#file-structure)
 - [Contributing](#contributing)
-- [License](#license)
+
 
 ## Features
 ### Passengers
