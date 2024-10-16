@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoGora Sign up & Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-section">
+            <div class="promo-content">
+                <!-- Add the logo image here -->
+                <img src="your-logo.png" alt="" class="promo-logo">
+                <h1 class="promo-title">GoGora</h1>
+                <p class="promo-subtitle">Your journey, our pride!</p>
+            </div>
+        </div>
+        <!-- Registration Form -->
+        <div class="right-section">
+            <div class="form-container" id="register-form">
+                <h2>Get Started Today</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Choose a username" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter a password" required>
+                    </div>
+                    <!-- Dropdown Menu -->
+                    <div class="input-group">
+                        <label for="user-type">Select user type</label>
+                        <select id="user-type" required>
+                            <option value="student">Student</option>
+                            <option value="teacher">Faculty</option>
+                            <option value="teacher">Employee</option>
+                        </select>
+                    </div>
+                    <div class="terms">
+                        <input type="checkbox" id="agree" required>
+                        <label for="agree">I agree to the <a href="#">Terms & Conditions</a></label>
+                    </div>
+                    <button type="submit" class="register-btn">Register</button>
+                </form>
+                <p class="login-text">Already a member? <a href="#" id="show-login-form">Log in</a></p>
+            </div>
+
+            <!-- Login Form (Initially Hidden) -->
+            <div class="form-container" id="login-form" style="display: none;">
+                <h2>Welcome Back</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="login-email">Email address</label>
+                        <input type="email" id="login-email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                    </div>
+                    <button type="submit" class="register-btn">Log In</button>
+                </form>
+                <p class="login-text">Don't have an account? <a href="#" id="show-register-form">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
