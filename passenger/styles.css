@@ -281,3 +281,125 @@ h2 {
 .book-btn:hover {
     background-color: #77ABE2;
 }
+
+/* Booking Details */
+#details-bod {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    flex-direction: column;
+    align-items: center;
+    background: #F2F7FF;
+    height: 100vh;
+    padding-top: 70px;
+}
+
+.details-cont h1 {
+    color: #0071CE;
+}
+
+.ride-details {
+    background-color: #d1e4fd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+h2 {
+    text-align: center;
+    color: #007BFF;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.label {
+    color: #103166;
+    font-weight: bold;
+}
+
+.value {
+    color: #333;
+}
+
+.button-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.confirm-btn,
+.cancel-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px 0;
+    width: 60%;
+}
+
+.confirm-btn {
+    background-color: #0071CE;
+    color: white;
+    font-size: 18px;
+}
+
+.confirm-btn:hover {
+    background-color: #3f89d9;
+}
+
+.cancel-btn {
+    background-color: #8B0000;
+    color: white;
+    font-size: 18px;
+}
+
+.cancel-btn:hover {
+    background-color: #D60000;
+}
+
+/* Confirmation */
+#confirm-bod {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    flex-direction: column;
+    align-items: center;
+    background: #F2F7FF;
+    height: 100vh;
+    padding-top: 70px;
+}
+
+.confirm-cont {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.confirm-cont h1 {
+    color: #0071CE;
+}
+
+.confirm-cont p {
+    font-weight: bold;
+}
+
+.confirm-cont img {
+    display: block;
+    margin: 20px auto;
+    max-width: 70px;
+    height: auto;
+}
