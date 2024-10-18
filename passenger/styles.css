@@ -17,8 +17,8 @@ body {
 /* Container */
 .container {
     display: flex;
-    width: 1200px; 
-    height: 700px;  
+    width: 1200px;
+    height: 700px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     overflow: hidden;
@@ -30,7 +30,7 @@ body {
 
 /* Left Section */
 .left-section {
-    width: 55%; 
+    width: 55%;
     background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%);
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@ body {
 
 /* Right Section */
 .right-section {
-    width: 55%; 
+    width: 55%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,7 +52,7 @@ body {
 }
 
 .form-container {
-    width: 90%; 
+    width: 90%;
     padding: 30px;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 16px;
@@ -81,7 +81,8 @@ h2 {
     font-size: 14px;
 }
 
-.input-group input, .input-group select {
+.input-group input,
+.input-group select {
     width: 100%;
     padding: 12px;
     border: none;
@@ -109,9 +110,10 @@ h2 {
     justify-content: space-between;
 }
 
-.first-name, .last-name {
-    flex: 1; 
-    margin-right: 10px; 
+.first-name,
+.last-name {
+    flex: 1;
+    margin-right: 10px;
 }
 
 .last-name {
@@ -119,7 +121,7 @@ h2 {
 }
 
 .input-group {
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
 }
 
 /* Terms and Register Button */
@@ -137,7 +139,8 @@ h2 {
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease;
-    margin-bottom: 30px; /* Adjusted for more space */
+    margin-bottom: 30px;
+    /* Adjusted for more space */
 }
 
 .register-btn:hover {
@@ -146,7 +149,7 @@ h2 {
 
 
 .login-text {
-    margin-top: 10px; 
+    margin-top: 10px;
     text-align: center;
 }
 
@@ -161,18 +164,120 @@ h2 {
 
 /* Go to Dashboard Button */
 .dashboard-btn {
-    width: 100%; 
-    padding: 14px; 
-    background-color: #3A3D98; 
-    border: none; 
-    color: #fff; 
-    font-size: 16px; 
-    border-radius: 8px; 
-    cursor: pointer; 
-    transition: background 0.3s ease; 
-    margin-top: 20px; /* Optional: adds space above the button */
+    width: 100%;
+    padding: 14px;
+    background-color: #3A3D98;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 20px;
+    /* Optional: adds space above the button */
 }
 
 .dashboard-btn:hover {
-    background-color: #2A2C78; 
+    background-color: #2A2C78;
+}
+
+/* Booking */
+#book-bod {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    flex-direction: column;
+    align-items: center;
+    background: #103166;
+    height: 100vh;
+    padding-top: 70px;
+}
+
+.book-head {
+    background-color: #103166;
+    width: 100%;
+    padding: 20px 0;
+    color: #FDBE34;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.book-head h1 {
+    font-size: 2.5em;
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.book-head a {
+    position: absolute;
+    right: 20px;
+}
+
+.book-head img {
+    height: 40px;
+}
+
+.book-cont {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1100px;
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(10px);
+}
+
+.ride-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 25px;
+}
+
+.ride-item {
+    background-color: #F2F7FF;
+    border-radius: 10px;
+    border-color: #007BFF;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.ride-info h2 {
+    font-size: 1.2em;
+    color: #4CAF50;
+}
+
+.ride-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #103166;
+}
+
+.book-btn {
+    padding: 10px 15px;
+    background-color: #0071CE;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.book-btn:hover {
+    background-color: #77ABE2;
 }
