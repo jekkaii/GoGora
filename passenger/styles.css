@@ -11,14 +11,14 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%); /* Smooth gradient background */
+    background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
 }
 
 /* Container */
 .container {
     display: flex;
-    width: 1100px; 
-    height: 650px;  
+    width: 1200px; 
+    height: 700px;  
     background: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     overflow: hidden;
@@ -31,31 +31,13 @@ body {
 /* Left Section */
 .left-section {
     width: 55%; 
-    background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%); 
+    background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     color: #fff;
     font-weight: 700;
-    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-}
-
-.promo-content {
-    padding: 30px;
-}
-
-.promo-content h1 {
-    font-size: 2.8rem;
-    line-height: 1.4;
-    margin-bottom: 15px;
-    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.promo-content p {
-    font-size: 1.1rem;
-    margin-bottom: 25px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Right Section */
@@ -70,8 +52,8 @@ body {
 }
 
 .form-container {
-    width: 80%;
-    padding: 40px;
+    width: 90%; 
+    padding: 30px;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
@@ -82,14 +64,15 @@ body {
 }
 
 h2 {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
     font-size: 24px;
-    color: #3A3D98; /* Deep color for heading */
+    color: #3A3D98;
 }
 
+/* Input groups */
 .input-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .input-group label {
@@ -98,7 +81,7 @@ h2 {
     font-size: 14px;
 }
 
-.input-group input {
+.input-group input, .input-group select {
     width: 100%;
     padding: 12px;
     border: none;
@@ -110,60 +93,60 @@ h2 {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.input-group input::placeholder {
-    color: rgba(100, 100, 100, 0.7);
-}
-
-/* Dropdown Styles */
-.input-group select {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #444;
-    outline: none;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-.input-group select:focus {
-    background-color: rgba(255, 255, 255, 0.4);
-}
-
-.terms {
-    margin-bottom: 20px;
+/* Flex for side-by-side fields */
+.input-row {
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.terms input {
-    margin-right: 10px;
+.input-row .input-group {
+    width: 48%;
 }
 
-.terms label a {
-    color: #3A3D98; /* Highlighted color */
+.name-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.first-name, .last-name {
+    flex: 1; 
+    margin-right: 10px; 
+}
+
+.last-name {
+    margin-right: 0;
+}
+
+.input-group {
+    margin-bottom: 15px; 
+}
+
+/* Terms and Register Button */
+.terms {
+    margin-bottom: 15px;
 }
 
 .register-btn {
     width: 100%;
     padding: 14px;
-    background-color: #3A3D98; /* Button color */
+    background-color: #3A3D98;
     border: none;
     color: #fff;
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease;
+    margin-bottom: 30px; /* Adjusted for more space */
 }
 
 .register-btn:hover {
     background-color: #2A2C78;
 }
 
+
 .login-text {
-    margin-top: 10px;
+    margin-top: 10px; 
     text-align: center;
 }
 
@@ -174,4 +157,22 @@ h2 {
 
 .login-text a:hover {
     text-decoration: underline;
+}
+
+/* Go to Dashboard Button */
+.dashboard-btn {
+    width: 100%; 
+    padding: 14px; 
+    background-color: #3A3D98; 
+    border: none; 
+    color: #fff; 
+    font-size: 16px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    transition: background 0.3s ease; 
+    margin-top: 20px; /* Optional: adds space above the button */
+}
+
+.dashboard-btn:hover {
+    background-color: #2A2C78; 
 }
