@@ -413,3 +413,73 @@ form label, form select, form button {
     max-width: 70px;
     height: auto;
 }
+
+/* Update Avatar */
+/* Update Avatar */
+
+/* The container that simulates the page background */
+.avatar-page-container {
+    background-color: #F2F7FF; /* Set the desired background color here */
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;      /* Centers vertically */
+    height: 100vh;            /* Full viewport height */
+    width: 100vw;             /* Full viewport width */
+    margin: 0;
+    padding: 0;
+}
+
+/* The content styling */
+.update-cont {
+    text-align: center;
+    background-color: #F2F7FF;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #0071CE;
+}
+
+p {
+    margin: 5px 0;
+    font-weight: bold;
+    color: #0071CE;
+    font-size: 1.2em;
+}
+
+#update-avatar-btn, #save-avatar-btn {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+#update-avatar-btn:hover, #save-avatar-btn:hover {
+    background-color: #A7A4A4;
+}
+
+#cancel-avatar-btn {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: #000000;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+#cancel-avatar-btn:hover {
+    background-color: #A7A4A4;
+}
