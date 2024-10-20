@@ -1,14 +1,14 @@
 // Switch between forms (register and login)
 document.getElementById('show-login-form').addEventListener('click', function (event) {
     event.preventDefault();
-    document.getElementById('register-form').style.display = 'none';
-    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('registration-form').style.display = 'none'; // Correct ID
+    document.getElementById('login-form').style.display = 'block'; // This ID is correct
 });
 
 document.getElementById('show-register-form').addEventListener('click', function (event) {
     event.preventDefault();
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('register-form').style.display = 'block';
+    document.getElementById('login-form').style.display = 'none'; // This ID is correct
+    document.getElementById('registration-form').style.display = 'block'; // Correct ID
 });
 
 // Handle registration form submission
@@ -42,40 +42,37 @@ document.getElementById('registration-form').addEventListener('submit', function
         });
 });
 
-
-
 // Handle login form submission
 document.getElementById('login-form').addEventListener('submit', function (event) {
     event.preventDefault();
-    // Simulate login process (you can handle form validation here)
     // After successful login, redirect to the photo upload form
     document.getElementById('login-form').style.display = 'none';
     document.getElementById('upload-photo-form').style.display = 'block';
 });
 
-// Handle photo upload form submission
-document.getElementById('photo-upload-form').addEventListener('submit', function (event) {
-    event.preventDefault();
-    // You can add photo verification logic here before redirecting
-    // Redirect to the verification page
-    window.location.href = "verification.html";
-});
+// // Handle photo upload form submission
+// document.getElementById('photo-upload-form').addEventListener('submit', function (event) {
+//     event.preventDefault();
+//     // You can add photo verification logic here before redirecting
+//     // Redirect to the verification page
+//     window.location.href = "verification.html";
+// });
 
-// Verification page function to redirect to dashboard
-function redirectToHome() {
-    window.location.href = "dashboard.html"; // Redirect to dashboard or home page
-}
+// // Verification page function to redirect to dashboard
+// function redirectToHome() {
+//     window.location.href = "dashboard.html"; // Redirect to dashboard or home page
+// }
 
-function selectAvatar(element, avatarPath) {
-    // Remove 'selected' class from all avatars
-    document.querySelectorAll('.avatar-icon').forEach(icon => icon.classList.remove('selected'));
+// function selectAvatar(element, avatarPath) {
+//     // Remove 'selected' class from all avatars
+//     document.querySelectorAll('.avatar-icon').forEach(icon => icon.classList.remove('selected'));
 
-    // Add 'selected' class to the clicked avatar
-    element.classList.add('selected');
+//     // Add 'selected' class to the clicked avatar
+//     element.classList.add('selected');
 
-    // Change the current avatar image to the one selected
-    document.getElementById('current-avatar').src = avatarPath;
+//     // Change the current avatar image to the one selected
+//     document.getElementById('current-avatar').src = avatarPath;
 
-    // Set the selected avatar path into the hidden input (for saving)
-    document.getElementById('selected-avatar').value = avatarPath;
-}
+//     // Set the selected avatar path into the hidden input (for saving)
+//     document.getElementById('selected-avatar').value = avatarPath;
+// }
