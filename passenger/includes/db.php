@@ -2,7 +2,7 @@
 $server = "localhost";
 $username = "root";
 $password = "";
-$database = "gogora_users";
+$database = "gogora_db";
 
 $conn = new mysqli($server, $username, $password, $database);
 

@@ -58,25 +58,26 @@
       <button type="submit" class="register-btn">Register</button>
       <p class="login-text">Already a member? <a href="#" id="show-login-form">Log in</a></p>
   </form>
-        <!-- Login Form -->
-        <div class="form-container" id="login-form" style="display: none;">
-          <h2>Welcome Back</h2>
-          <form id="login-form">
-            <div class="input-group">
-              <label for="login-email">Username</label>
-              <input type="email" id="login-email" placeholder="Enter your username" required>
-            </div>
-            <div class="input-group">
-              <label for="login-password">Password</label>
-              <input type="password" id="login-password" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="register-btn" id="login-btn">Log In</button>
-          </form>
-          <p class="login-text">Don't have an account? <a href="#" id="show-register-form">Sign Up</a>
-          </p>
-        </div>
+<!-- Keep only one instance of the login form -->
+<div class="form-container" id="login-form" style="display: none;">
+  <h2>Welcome Back</h2>
+  <!-- Login Form -->
+  <form id="login-form-element" method="POST">
+    <div class="input-group">
+      <label for="login-username">Username</label>
+      <input type="text" id="login-username" name="username" placeholder="Enter your username" required>
+    </div>
+    <div class="input-group">
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
+    </div>
+    <button type="submit" class="register-btn" id="login-btn">Log In</button>
+  </form>
+  <p class="login-text">Don't have an account? <a href="#" id="show-register-form">Sign Up</a></p>
+</div>
+
         <!-- Photo Upload Form -->
-        <div class="form-container" id="upload-photo-form" style="display: none;">
+        <!-- <div class="form-container" id="upload-photo-form" style="display: none;">
           <h2>Upload Your Photo</h2>
           <form id="photo-upload-form" action="verification.html" method="POST" enctype="multipart/form-data">
             <div class="input-group">
@@ -85,7 +86,7 @@
             </div>
             <button type="submit" class="register-btn">Submit Photo</button>
           </form>
-        </div>
+        </div> -->
       </div>
     </div>
     <script src="script.js"></script>

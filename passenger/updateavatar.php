@@ -8,10 +8,10 @@
 </head>
 <body>
 
-    <div class="avatar-page-container"> <!-- The container with the background color -->
+    <div class="avatar-page-container">
         <div class="update-cont">
             <!-- Avatar -->
-            <img src="GoGora/passenger/assets/profile.png" alt="Current Avatar" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px;">
+            <img id="current-avatar" src="GoGora/passenger/assets/profile.png" alt="Current Avatar" style="width: 150px; height: 150px; border-radius: 50%; margin-bottom: 20px;">
         
             <section class="update-cont">
                 <!-- User Info -->
@@ -20,7 +20,7 @@
             
                 <!-- Buttons -->
                 <form action="change_avatar.php" method="POST">
-                    <button id="update-avatar-btn" class="submit-btn">Change Avatar</button>
+                    <button id="update-avatar-btn" class="submit-btn" type="button" onclick="window.location.href='change_avatar.php';">Change Avatar</button>
                 </form>
 
                 <button id="save-avatar-btn" class="submit-btn">Save Changes</button>

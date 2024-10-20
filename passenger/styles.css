@@ -478,8 +478,45 @@ p {
     border: none;
     border-radius: 30px;
     cursor: pointer;
+
 }
 
 #cancel-avatar-btn:hover {
     background-color: #A7A4A4;
+}
+
+/* Change Avatar */
+/* Avatar Grid */
+.avatar-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create 3 columns */
+    gap: 10px; /* Adjust the gap between icons as needed */
+    justify-content: center; /* Center the grid horizontally */
+}
+
+/* Individual Avatar Styles */
+.avatar-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.avatar-icon:hover {
+    transform: scale(1.1);
+}
+
+#choose-avatar-btn {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1em;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+
 }
