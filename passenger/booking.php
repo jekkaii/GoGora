@@ -11,63 +11,96 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch all unique routes for the dropdown
-$routes_result = $conn->query("SELECT DISTINCT route FROM rides");
-
 // Initialize filtered rides variable
 $rides = [];
 
 // Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $route = $_POST['route'];  // selected route 
+    $route = $_POST['route'];  // typed route from search bar
     $ride_type = $_POST['ride_type']; // selected ride Type
     $time = $_POST['time'];  // selected specific time
 
-    if ($route === 'All' && $ride_type === 'All' && $time === 'All') {
+    // Determine the time range for filtering (from selected time to one hour later)
+    if ($time !== 'All') {
+        $start_time = $time;  // Start time is the time selected by the user
+        // Add one hour to the selected time
+        $end_time = date('H:i:s', strtotime('+1 hour', strtotime($time)));
+    }
+
+    // Handle different combinations of route, ride_type, and time
+    if ($route === '' && $ride_type === 'All' && $time === 'All') {
         // No filtering applied
         $query = "SELECT * FROM rides";
         $result = $conn->query($query);
-    } elseif ($route === 'All' && $ride_type === 'All') {
-        // Filter only by time
-        $query = "SELECT * FROM rides WHERE TIME(time) = ?";
+
+    } elseif ($route === '' && $ride_type === 'All') {
+        // Filter only by time range
+        $query = "SELECT * FROM rides WHERE TIME(time) BETWEEN ? AND ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param('s', $time);  
+        $stmt->bind_param('ss', $start_time, $end_time);
         $stmt->execute();
         $result = $stmt->get_result();
 
-    } elseif ($route === 'All') {
-        // Filter by ride type and optionally by time
-        $query = "SELECT * FROM rides WHERE ride_type = ?". ($time !== 'All' ? " AND TIME(time) = ?" : "");
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param($time !== 'All' ? 'ss' : 's', $ride_type, $time);
+    } elseif ($route === '') {
+        // Filter by ride type and optionally by time range
+        if ($time !== 'All') {
+            $query = "SELECT * FROM rides WHERE ride_type = ? AND TIME(time) BETWEEN ? AND ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('sss', $ride_type, $start_time, $end_time);
+        } else {
+            $query = "SELECT * FROM rides WHERE ride_type = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param('s', $ride_type);
+        }
         $stmt->execute();
         $result = $stmt->get_result();
 
     } elseif ($ride_type === 'All') {
-        // Filter by route and optionally by time
-        $query = "SELECT * FROM rides WHERE route = ?". ($time !== 'All' ? " AND TIME(time) = ?" : "");
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param($time !== 'All' ? 'ss' : 's', $route, $time);
+        // Filter by route (search) and optionally by time range
+        if ($time !== 'All') {
+            $query = "SELECT * FROM rides WHERE LOWER(route) LIKE LOWER(?) AND TIME(time) BETWEEN ? AND ?";
+            $stmt = $conn->prepare($query);
+            $route_param = "%" . $route . "%"; // for partial match in search
+            $stmt->bind_param('sss', $route_param, $start_time, $end_time);
+        } else {
+            $query = "SELECT * FROM rides WHERE LOWER(route) LIKE LOWER(?)";
+            $stmt = $conn->prepare($query);
+            $route_param = "%" . $route . "%";
+            $stmt->bind_param('s', $route_param);
+        }
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
     } else {
-        // Filter by route, ride type, and optionally by time
-        $query = "SELECT * FROM rides WHERE route = ? AND ride_type = ?". ($time !== 'All' ? " AND TIME(time) = ?" : "");
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param($time !== 'All' ? 'sss' : 'ss', $route, $ride_type, $time);
+        // Filter by route, ride type, and optionally by time range
+        if ($time !== 'All') {
+            $query = "SELECT * FROM rides WHERE LOWER(route) LIKE LOWER(?) AND ride_type = ? AND TIME(time) BETWEEN ? AND ?";
+            $stmt = $conn->prepare($query);
+            $route_param = "%" . $route . "%";
+            $stmt->bind_param('ssss', $route_param, $ride_type, $start_time, $end_time);
+        } else {
+            $query = "SELECT * FROM rides WHERE LOWER(route) LIKE LOWER(?) AND ride_type = ?";
+            $stmt = $conn->prepare($query);
+            $route_param = "%" . $route . "%";
+            $stmt->bind_param('ss', $route_param, $ride_type);
+        }
         $stmt->execute();
         $result = $stmt->get_result();
     }
 
-    // Fetch filtered rides
-    if ($result->num_rows > 0) {
-        $rides = $result->fetch_all(MYSQLI_ASSOC);
-    }
+} else {
+    // If the form is not submitted, show all rides by default
+    $query = "SELECT * FROM rides";
+    $result = $conn->query($query);
+}
 
-    if (isset($stmt)) {
-        $stmt->close();
-    }
+// Fetch filtered rides
+if ($result->num_rows > 0) {
+    $rides = $result->fetch_all(MYSQLI_ASSOC);
+}
+
+if (isset($stmt)) {
+    $stmt->close();
 }
 
 $conn->close();
@@ -91,27 +124,16 @@ $conn->close();
     <!-- Main Content Section -->
     <div class="book-cont">
         <form method="POST" action="">
-            <!-- Route Selection -->
-            <label for="route">Select Route:</label>
-            <select name="route" id="route">
-                <option value="All">All Rides</option>
-                <?php if ($routes_result->num_rows > 0): ?>
-                    <?php while ($row = $routes_result->fetch_assoc()): ?>
-                        <option value="<?= htmlspecialchars($row['route']); ?>">
-                            <?= htmlspecialchars($row['route']); ?>
-                        </option>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <option value="">No routes available</option>
-                <?php endif; ?>
-            </select>
+            <!-- Route Search Bar -->
+            <label for="route">Search Route:</label>
+            <input type="text" name="route" id="route" placeholder="Enter route name" value="<?= isset($_POST['route']) ? htmlspecialchars($_POST['route']) : ''; ?>">
 
             <!-- Ride Type Selection -->
             <label for="ride_type">Select Ride Type:</label>
             <select name="ride_type" id="ride_type">
                 <option value="All">All types</option>
-                <option value="Jeepney">Jeepney</option>
-                <option value="Service">Service</option>
+                <option value="Jeepney" <?= (isset($_POST['ride_type']) && $_POST['ride_type'] === 'Jeepney') ? 'selected' : ''; ?>>Jeepney</option>
+                <option value="Service" <?= (isset($_POST['ride_type']) && $_POST['ride_type'] === 'Service') ? 'selected' : ''; ?>>Service</option>
             </select>
 
             <!-- Time Selection with 30-minute intervals -->
@@ -126,14 +148,16 @@ $conn->close();
                     while ($start <= $end) {
                         $time_option = $start->format('H:i:s');
                         $display_time = $start->format('g:i A');
-                        echo "<option value='$time_option'>$display_time</option>";
-                        $start->modify('+30 minutes');
+                        echo "<option value='$time_option' ". (isset($_POST['time']) && $_POST['time'] === $time_option ? 'selected' : '') . ">$display_time</option>";
+                        $start->modify('+0 minutes'); // for interval
                     }
                 ?>
             </select>
 
             <!-- Submit Button -->
-            <button type="submit">Select</button>
+            <button type="submit">Search</button>
+            <!-- Clear Filter Button (reset the form and reload the page) -->
+            <button type="button" onclick="window.location.href='booking.php';">Clear Filter</button>
         </form>
 
         <!-- Display Available Rides -->
