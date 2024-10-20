@@ -65,3 +65,17 @@ document.getElementById('photo-upload-form').addEventListener('submit', function
 function redirectToHome() {
     window.location.href = "dashboard.html"; // Redirect to dashboard or home page
 }
+
+function selectAvatar(element, avatarPath) {
+    // Remove 'selected' class from all avatars
+    document.querySelectorAll('.avatar-icon').forEach(icon => icon.classList.remove('selected'));
+
+    // Add 'selected' class to the clicked avatar
+    element.classList.add('selected');
+
+    // Change the current avatar image to the one selected
+    document.getElementById('current-avatar').src = avatarPath;
+
+    // Set the selected avatar path into the hidden input (for saving)
+    document.getElementById('selected-avatar').value = avatarPath;
+}
