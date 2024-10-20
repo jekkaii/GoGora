@@ -1,15 +1,16 @@
 // Switch between forms (register and login)
 document.getElementById('show-login-form').addEventListener('click', function (event) {
     event.preventDefault();
-    document.getElementById('registration-form').style.display = 'none'; // Correct ID
-    document.getElementById('login-form').style.display = 'block'; // This ID is correct
+    document.getElementById('registration-form').style.display = 'none';
+    document.getElementById('login-form').style.display = 'block';
 });
 
 document.getElementById('show-register-form').addEventListener('click', function (event) {
     event.preventDefault();
-    document.getElementById('login-form').style.display = 'none'; // This ID is correct
-    document.getElementById('registration-form').style.display = 'block'; // Correct ID
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('registration-form').style.display = 'block';
 });
+
 
 // Handle registration form submission
 document.getElementById('registration-form').addEventListener('submit', function (event) {
@@ -43,11 +44,43 @@ document.getElementById('registration-form').addEventListener('submit', function
 });
 
 // Handle login form submission
-document.getElementById('login-form').addEventListener('submit', function (event) {
+document.getElementById('login-form-element').addEventListener('submit', function (event) {
     event.preventDefault();
-    // After successful login, redirect to the photo upload form
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('upload-photo-form').style.display = 'block';
+
+    // Collect form data
+    const formData = new FormData(this);
+
+    // Debugging: Log to see if the form is being submitted
+    console.log('Login form submitted.');
+
+    // Send login data via AJAX to login.php
+    fetch('includes/login.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            // Debugging: Check if response is OK (status 200)
+            console.log('Response received:', response);
+            return response.json();
+        })
+        .then(data => {
+            // Debugging: Log the response data
+            console.log('Response data:', data);
+
+            if (data.success) {
+                // If login is successful, redirect to the homepage or desired location
+                if (confirm(data.message)) {
+                    window.location.href = 'booking.php';  // Redirect to booking page
+                }
+            } else {
+                // Show error message in a confirm dialog
+                confirm(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            confirm('Login failed. Please try again.');
+        });
 });
 
 // // Handle photo upload form submission
