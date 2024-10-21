@@ -8,7 +8,9 @@ $dbname = 'gogora_db';
 $conn = new mysqli($host, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    error_log("Database connection failed: " . $conn->connect_error);
+    echo "Sorry, something went wrong. Please try again later.";
+    exit();
 }
 
 // Initialize filtered rides variable
@@ -23,17 +25,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Determine the time range for filtering (from selected time to one hour later)
     if ($time !== 'All') {
         $start_time = $time;  // Start time is the time selected by the user
-        // Add one hour to the selected time
-        $end_time = date('H:i:s', strtotime('+1 hour', strtotime($time)));
+        $end_time = date('H:i:s', strtotime('+1 hour', strtotime($time))); // Add one hour to the selected time
     }
 
     // Handle different combinations of route, ride_type, and time
-    if ($route === '' && $ride_type === 'All' && $time === 'All') {
+    if (empty($route) && $ride_type === 'All' && $time === 'All') {
         // No filtering applied
         $query = "SELECT * FROM rides";
         $result = $conn->query($query);
 
-    } elseif ($route === '' && $ride_type === 'All') {
+    } elseif (empty($route) && $ride_type === 'All') {
         // Filter only by time range
         $query = "SELECT * FROM rides WHERE TIME(time) BETWEEN ? AND ?";
         $stmt = $conn->prepare($query);
@@ -41,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->execute();
         $result = $stmt->get_result();
 
-    } elseif ($route === '') {
+    } elseif (empty($route)) {
         // Filter by ride type and optionally by time range
         if ($time !== 'All') {
             $query = "SELECT * FROM rides WHERE ride_type = ? AND TIME(time) BETWEEN ? AND ?";
@@ -58,15 +59,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($ride_type === 'All') {
         // Filter by route (search) and optionally by time range
         if ($time !== 'All') {
-            $query = "SELECT * FROM rides WHERE LOWER(route) LIKE LOWER(?) AND TIME(time) BETWEEN ? AND ?";
-            $stmt = $conn->prepare($query);
-            $route_param = "%" . $route . "%"; // for partial match in search
-            $stmt->bind_param('sss', $route_param, $start_time, $end_time);
+            if (stripos($route, 'igorot') !== false && stripos($route, 'bakakeng') === false) {
+                // If the user types "igorot", return "Igorot to Bakakeng"
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?) AND TIME(time) BETWEEN ? AND ?";
+                $route_param = "igorot to bakakeng";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('sss', $route_param, $start_time, $end_time);
+            } elseif (stripos($route, 'bakakeng') !== false && stripos($route, 'igorot') === false) {
+                // If the user types "bakakeng", return "Bakakeng to Igorot"
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?) AND TIME(time) BETWEEN ? AND ?";
+                $route_param = "bakakeng to igorot";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('sss', $route_param, $start_time, $end_time);
+            } else {
+                // Full match for "Igorot to Bakakeng" or "Bakakeng to Igorot"
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?) AND TIME(time) BETWEEN ? AND ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('sss', $route, $start_time, $end_time);
+            }
         } else {
-            $query = "SELECT * FROM rides WHERE LOWER(route) LIKE LOWER(?)";
-            $stmt = $conn->prepare($query);
-            $route_param = "%" . $route . "%";
-            $stmt->bind_param('s', $route_param);
+            if (stripos($route, 'igorot') !== false && stripos($route, 'bakakeng') === false) {
+                // If the user types "igorot", return "Igorot to Bakakeng"
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?)";
+                $route_param = "igorot to bakakeng";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('s', $route_param);
+            } elseif (stripos($route, 'bakakeng') !== false && stripos($route, 'igorot') === false) {
+                // If the user types "bakakeng", return "Bakakeng to Igorot"
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?)";
+                $route_param = "bakakeng to igorot";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('s', $route_param);
+            } else {
+                // Full match for "Igorot to Bakakeng" or "Bakakeng to Igorot"
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?)";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('s', $route);
+            }
         }
         $stmt->execute();
         $result = $stmt->get_result();
@@ -74,15 +103,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Filter by route, ride type, and optionally by time range
         if ($time !== 'All') {
-            $query = "SELECT * FROM rides WHERE LOWER(route) LIKE LOWER(?) AND ride_type = ? AND TIME(time) BETWEEN ? AND ?";
-            $stmt = $conn->prepare($query);
-            $route_param = "%" . $route . "%";
-            $stmt->bind_param('ssss', $route_param, $ride_type, $start_time, $end_time);
+            if (stripos($route, 'igorot') !== false && stripos($route, 'bakakeng') === false) {
+                // Filter for "Igorot to Bakakeng" with ride type and time
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?) AND ride_type = ? AND TIME(time) BETWEEN ? AND ?";
+                $route_param = "igorot to bakakeng";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ssss', $route_param, $ride_type, $start_time, $end_time);
+            } elseif (stripos($route, 'bakakeng') !== false && stripos($route, 'igorot') === false) {
+                // Filter for "Bakakeng to Igorot" with ride type and time
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?) AND ride_type = ? AND TIME(time) BETWEEN ? AND ?";
+                $route_param = "bakakeng to igorot";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ssss', $route_param, $ride_type, $start_time, $end_time);
+            } else {
+                // Full match for "Igorot to Bakakeng" or "Bakakeng to Igorot" with ride type and time
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?) AND ride_type = ? AND TIME(time) BETWEEN ? AND ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ssss', $route, $ride_type, $start_time, $end_time);
+            }
         } else {
-            $query = "SELECT * FROM rides WHERE LOWER(route) LIKE LOWER(?) AND ride_type = ?";
-            $stmt = $conn->prepare($query);
-            $route_param = "%" . $route . "%";
-            $stmt->bind_param('ss', $route_param, $ride_type);
+            if (stripos($route, 'igorot') !== false && stripos($route, 'bakakeng') === false) {
+                // Filter for "Igorot to Bakakeng" with ride type
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?) AND ride_type = ?";
+                $route_param = "igorot to bakakeng";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ss', $route_param, $ride_type);
+            } elseif (stripos($route, 'bakakeng') !== false && stripos($route, 'igorot') === false) {
+                // Filter for "Bakakeng to Igorot" with ride type
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?) AND ride_type = ?";
+                $route_param = "bakakeng to igorot";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ss', $route_param, $ride_type);
+            } else {
+                // Full match for "Igorot to Bakakeng" or "Bakakeng to Igorot" with ride type
+                $query = "SELECT * FROM rides WHERE LOWER(route) = LOWER(?) AND ride_type = ?";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ss', $route, $ride_type);
+            }
         }
         $stmt->execute();
         $result = $stmt->get_result();
@@ -95,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Fetch filtered rides
-if ($result->num_rows > 0) {
+if ($result && $result->num_rows > 0) {
     $rides = $result->fetch_all(MYSQLI_ASSOC);
 }
 
@@ -105,6 +162,7 @@ if (isset($stmt)) {
 
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -149,7 +207,7 @@ $conn->close();
                         $time_option = $start->format('H:i:s');
                         $display_time = $start->format('g:i A');
                         echo "<option value='$time_option' ". (isset($_POST['time']) && $_POST['time'] === $time_option ? 'selected' : '') . ">$display_time</option>";
-                        $start->modify('+0 minutes'); // for interval
+                        $start->modify('+30 minutes'); // for interval
                     }
                 ?>
             </select>
