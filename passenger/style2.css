@@ -27,21 +27,6 @@ body {
     padding-top: 70px;
 }
 
-.book-head {
-    height: 10% !important;
-    width: 100%;
-    padding: 20px 0;
-    color: #FDBE34;
-    position: fixed;
-    top: 1% !important;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 100% ;
-
-}
-
 .book-head h1 {
     font-size: 2.5em;
     margin: 0;
@@ -50,14 +35,21 @@ body {
     transform: translateX(-50%);
 }
 
-.book-head a {
-    position: absolute;
-    right: 20px;
-}
-
 .book-head img {
     padding-top: 10%;
     height: 40px;
+}
+
+.logout-link{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.logout-link a{
+    text-decoration: none;
+    color: white;
 }
 
 .book-cont {

@@ -179,6 +179,9 @@ $conn->close();
     <header class="book-head">
         <h1>GoGora</h1>
         <a href="#"><img src="assets/profile.png" alt="Profile"></a>
+        <div class="logout-link">
+            <a href="includes/logout.php"><img src="assets/logout.png">Logout</a>
+        </div>
     </header>
 
     <!-- Main Content Section -->
