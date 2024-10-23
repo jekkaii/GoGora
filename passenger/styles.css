@@ -35,9 +35,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
+    color: #091057;
     font-weight: 700;
     text-align: center;
+    font-size: 2rem;
 }
 
 /* Right Section */
@@ -52,6 +53,18 @@ body {
 }
 
 .form-container {
+    width: 100%;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #444;
+    text-align: left;
+}
+
+.login-container {
     width: 90%;
     padding: 30px;
     background: rgba(255, 255, 255, 0.3);
@@ -139,17 +152,16 @@ h2 {
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease;
-    margin-bottom: 30px;
-    /* Adjusted for more space */
+    margin-bottom: 20px; /* Reduced margin */
 }
 
 .register-btn:hover {
     background-color: #2A2C78;
 }
 
-
+/* Login Text */
 .login-text {
-    margin-top: 10px;
+    margin-top: 2px; /* Further reduced for closer spacing */
     text-align: center;
 }
 
@@ -181,342 +193,95 @@ h2 {
     background-color: #2A2C78;
 }
 
-/* Booking */
-#book-bod {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    flex-direction: column;
-    align-items: center;
-    background: #103166;
-    height: 100vh;
-    padding-top: 70px;
-}
-
-.book-head {
-    height: 10% !important;
-    width: 100%;
-    padding: 20px 0;
-    color: #FDBE34;
-    position: fixed;
-    top: 1% !important;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 100% ;
-
-}
-
-.book-head h1 {
-    font-size: 2.5em;
-    margin: 0;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.book-head a {
-    position: absolute;
-    right: 20px;
-}
-
-.book-head img {
-    padding-top: 10%;
-    height: 40px;
-}
-
-.book-cont {
-  
-    display: flex;
-    margin-bottom: 50px;
-    flex-direction: column;
-    align-items: center;
-    width: 1100px;
-    background: white;
+/* Main Container */
+.main-container {
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(10px);
-    padding: 20px;
-    height: 600px; 
-    overflow-y: auto; 
-    margin-top: 50px !important;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
 }
 
-.ride-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 25px;
-}
-
-.ride-item {
-    background-color: #F2F7FF;
-    border-radius: 10px;
-    border-color: #007BFF;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.ride-info h2 {
-    font-size: 1.2em;
-    color: #4CAF50;
-}
-
-.ride-info p {
-    margin: 5px 0;
-    font-size: 0.9em;
-    font-weight: bold;
-    color: #103166;
-}
-
-.book-btn {
-    padding: 10px 15px;
-    background-color: #0071CE;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.book-btn:hover {
-    background-color: #77ABE2;
-}
-
-/* Booking Details Body */
-#details-bod {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    background: #F2F7FF;
-    min-height: 100vh;
-    padding-top: 70px;
-}
-
-/* Header */
-.book-head {
-    background-color: #0071CE;
-    color: #FFF;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed; /* Keep header fixed */
-    top: 0;
-    width: 100%; /* Ensure header takes full width */
-    z-index: 10; /* Keep header on top */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Add margin below the header */
-.book-cont {
-    padding: 20px;
-    margin-top: 160px; /* Ensure enough space between the fixed header and content */
+/* Header Section */
+.header {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-/* Form styles for filtering rides */
-form {
-    display: inline-block;
-    margin-bottom: 30px;
+.header h1 {
+    font-size: 3rem;
+    color: #3A3D98;
 }
 
-form label, form select, form button {
-    font-size: 16px;
-    margin: 0 10px 10px 0;
+.header p {
+    font-size: 1.2rem;
+    color: #444;
 }
 
-/* Ride list grid layout */
-.ride-list {
+/* Booking Section */
+.booking-container {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+}
+
+.booking-container h2 {
+    font-size: 2rem;
+    text-align: center;
+    color: #3A3D98;
+    margin-bottom: 20px;
+}
+
+/* Ride Cards Grid */
+.ride-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    justify-content: center;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 20px; /* Gap between cards */
 }
 
-/* Styling for individual ride items */
-.ride-item {
-    background-color: #f5faff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 0 auto;
-}
-
-.ride-info p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #333;
-}
-
-/* Book button */
-.book-btn {
-    background-color: #0071CE;
-    color: #FFF;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.book-btn:hover {
-    background-color: #005bb5;
-}
-
-
-/* Confirmation */
-#confirm-bod {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    flex-direction: column;
-    align-items: center;
-    background: #F2F7FF;
-    height: 100vh;
-    padding-top: 70px;
-}
-
-.confirm-cont {
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.9);
+/* Ride Cards */
+.ride-card {
+    background: #fff;
+    padding: 30px; /* Increased padding for better spacing */
+    border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-
-.confirm-cont h1 {
-    color: #0071CE;
-}
-
-.confirm-cont p {
-    font-weight: bold;
-}
-
-.confirm-cont img {
-    display: block;
-    margin: 20px auto;
-    max-width: 70px;
-    height: auto;
-}
-
-/* Update Avatar */
-/* Update Avatar */
-
-/* The container that simulates the page background */
-.avatar-page-container {
-    background-color: #F2F7FF; /* Set the desired background color here */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
-    justify-content: center;  /* Centers horizontally */
-    align-items: center;      /* Centers vertically */
-    height: 100vh;            /* Full viewport height */
-    width: 100vw;             /* Full viewport width */
-    margin: 0;
-    padding: 0;
+    flex-direction: column;
+    gap: 10px; /* Space between elements */
 }
 
-/* The content styling */
-.update-cont {
-    text-align: center;
-    background-color: #F2F7FF;
-    padding: 20px;
-    border-radius: 10px;
+/* Title and Text */
+.ride-card h3 {
+    font-size: 1.5rem;
+    color: #3A3D98;
+    margin-bottom: 10px; /* Add margin for better separation */
 }
 
-h2 {
-    margin: 0;
-    font-size: 1.5em;
-    color: #0071CE;
+.ride-card p {
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 5px; /* Space between paragraphs */
 }
 
-p {
-    margin: 5px 0;
-    font-weight: bold;
-    color: #0071CE;
-    font-size: 1.2em;
-}
-
-#update-avatar-btn, #save-avatar-btn {
+/* Book Button */
+.book-btn {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 1em;
-    font-weight: bold;
+    padding: 12px;
+    background-color: #3A3D98;
     color: white;
-    background-color: black;
     border: none;
-    border-radius: 30px;
+    border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px; /* Space above the button */
 }
 
-#update-avatar-btn:hover, #save-avatar-btn:hover {
-    background-color: #A7A4A4;
-}
-
-#cancel-avatar-btn {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 1em;
-    font-weight: bold;
-    color: white;
-    background-color: #000000;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-
-}
-
-#cancel-avatar-btn:hover {
-    background-color: #A7A4A4;
-}
-
-/* Change Avatar */
-/* Avatar Grid */
-.avatar-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Create 3 columns */
-    gap: 10px; /* Adjust the gap between icons as needed */
-    justify-content: center; /* Center the grid horizontally */
-}
-
-/* Individual Avatar Styles */
-.avatar-icon {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.avatar-icon:hover {
-    transform: scale(1.1);
-}
-
-#choose-avatar-btn {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    font-size: 1em;
-    font-weight: bold;
-    color: white;
-    background-color: black;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-
+/* Hover Effect for Button */
+.book-btn:hover {
+    background-color: #2A2C78;
 }
