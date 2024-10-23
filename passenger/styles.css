@@ -53,7 +53,7 @@ body {
 }
 
 .form-container {
-    width: 100%;
+    width: 90%;
     padding: 30px;
     background: rgba(255, 255, 255, 0.3);
     border-radius: 16px;
@@ -152,7 +152,8 @@ h2 {
     border-radius: 8px;
     cursor: pointer;
     transition: background 0.3s ease;
-    margin-bottom: 20px; /* Reduced margin */
+    margin-bottom: 20px;
+    /* Reduced margin */
 }
 
 .register-btn:hover {
@@ -161,7 +162,8 @@ h2 {
 
 /* Login Text */
 .login-text {
-    margin-top: 2px; /* Further reduced for closer spacing */
+    margin-top: 2px;
+    /* Further reduced for closer spacing */
     text-align: center;
 }
 
@@ -238,33 +240,39 @@ h2 {
 /* Ride Cards Grid */
 .ride-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 20px; /* Gap between cards */
+    grid-template-columns: repeat(2, 1fr);
+    /* Two columns */
+    gap: 20px;
+    /* Gap between cards */
 }
 
 /* Ride Cards */
 .ride-card {
     background: #fff;
-    padding: 30px; /* Increased padding for better spacing */
+    padding: 30px;
+    /* Increased padding for better spacing */
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between elements */
+    gap: 10px;
+    /* Space between elements */
 }
 
 /* Title and Text */
 .ride-card h3 {
     font-size: 1.5rem;
     color: #3A3D98;
-    margin-bottom: 10px; /* Add margin for better separation */
+    margin-bottom: 10px;
+    /* Add margin for better separation */
 }
 
 .ride-card p {
     font-size: 1rem;
     color: #444;
-    margin-bottom: 5px; /* Space between paragraphs */
+    margin-bottom: 5px;
+    /* Space between paragraphs */
 }
 
 /* Book Button */
@@ -278,7 +286,8 @@ h2 {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 15px; /* Space above the button */
+    margin-top: 15px;
+    /* Space above the button */
 }
 
 /* Hover Effect for Button */
