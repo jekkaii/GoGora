@@ -7,6 +7,29 @@ $ride_type = $_POST['ride_type'];
 $plate_number = $_POST['plate_number'];
 $total_fare = $_POST['total_fare'];
 $capacity = $_POST['capacity'];
+
+// Retrieve reservation details based on ride_id and user_id
+if (isset($_POST['ride_id']) && isset($_POST['user_id'])) {
+    $ride_id = $_POST['ride_id'];
+    $user_id = $_POST['user_id'];
+    
+    // Here you can fetch reservation details if needed.
+    // For confirmation purposes, we will just display the ride details.
+    
+    $query = "SELECT * FROM rides WHERE ride_id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $ride_id);
+    $stmt->execute();
+    $ride_result = $stmt->get_result();
+
+    if ($ride_result->num_rows > 0) {
+        $ride = $ride_result->fetch_assoc();
+    } else {
+        echo "Ride not found.";
+        exit();
+    }
+}
+
 ?>
 
 <!DOCTYPE html>

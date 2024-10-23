@@ -160,6 +160,8 @@ if (isset($stmt)) {
     $stmt->close();
 }
 
+
+
 $conn->close();
 ?>
 
@@ -221,22 +223,26 @@ $conn->close();
         <!-- Display Available Rides -->
         <h1>Choose a Ride</h1>
         <section class="ride-list">
-            <?php if (!empty($rides)): ?>
-                <?php foreach ($rides as $ride): ?>
-                    <div class="ride-item">
-                        <div class="ride-info">
-                            <p>Route: <?= htmlspecialchars($ride['route']); ?></p>
-                            <p>Time: <?= date('g:i A', strtotime($ride['time'])); ?></p>
-                            <p>Seats Available: <?= $ride['seats_available']; ?></p>
-                            <p>Ride Type: <?= $ride['ride_type']; ?></p>
-                            <button class="book-btn">Book</button>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>No rides available at the moment.</p>
-            <?php endif; ?>
+        <?php if (!empty($rides)): ?>
+        <?php foreach ($rides as $ride): ?>
+            <div class="ride-item">
+                <div class="ride-info">
+                    <p>Route: <?= htmlspecialchars($ride['route']); ?></p>
+                    <p>Time: <?= date('g:i A', strtotime($ride['time'])); ?></p>
+                    <p>Seats Available: <?= $ride['seats_available']; ?></p>
+                    <p>Ride Type: <?= $ride['ride_type']; ?></p>
+                    <button type="button" class="book-btn" onclick="bookRide(<?= $ride['ride_id']; ?>)">Book</button>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <?php else: ?>
+            <p>No rides available at the moment.</p>
+        <?php endif; ?>
         </section>
+        <script>
+        function bookRide(rideId) {
+            window.location.href = 'confirmation.php?ride_id=' + rideId; // Redirect to confirmation page with ride ID
+            }</script>
     </div>
 </body>
 </html>

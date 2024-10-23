@@ -24,21 +24,21 @@ $capacity = $_POST['capacity'];
             <div class="detail-item">
                 <span class="label">Plate No.:</span> <span class="value"><?= htmlspecialchars($plate_number); ?></span>
             </div>
-            <div class="detail-item">
+            <!-- <div class="detail-item">
                 <span class="label">Departure:</span> <span class="value"><?= date('g:i A', strtotime($time)); ?></span>
-            </div>
+            </div> -->
             <div class="detail-item">
                 <span class="label">Capacity:</span> <span class="value"><?= htmlspecialchars($capacity); ?></span>
             </div>
-            <div class="detail-item">
+            <!-- <div class="detail-item">
                 <span class="label">Status:</span> <span class="value"><?= htmlspecialchars($seats_available); ?> seats available</span>
-            </div>
+            </div> -->
             <div class="detail-item">
                 <span class="label">Route:</span> <span class="value"><?= htmlspecialchars($route); ?></span>
             </div>
-            <div class="detail-item">
+            <!-- <div class="detail-item">
                 <span class="label">Total Fare:</span> <span class="value">₱<?= htmlspecialchars($total_fare); ?></span>
-            </div>
+            </div> -->
 
             <!-- Confirmation Form -->
             <form action="confirmation.php" method="POST">
