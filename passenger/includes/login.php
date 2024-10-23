@@ -6,6 +6,26 @@ session_start();    // Start the session to manage user login state
 $username = $_POST['username'] ?? '';
 $password = $_POST['password'] ?? '';
 
+// Check if a session already exists for the user
+if (isset($_SESSION['user_id'])) {
+    // Retrieve user status from the database
+    $statusSQL = "SELECT user_status FROM users WHERE user_id = ?";
+    $statusstmt = $conn->prepare($statusSQL);
+    $statusstmt->bind_param("i", $_SESSION['user_id']);
+    $statusstmt->execute();
+    $statusresult = $statusstmt->get_result();
+
+    if ($statusresult->num_rows > 0) {
+        $statusrow = $statusresult->fetch_assoc();
+        if ($statusrow['user_status'] === 'Online') {
+            // User is already logged in
+            echo json_encode(['success' => false, 'message' => 'You are already logged in.']);
+            exit;
+        }
+    }
+    $statusstmt->close();
+}
+
 // Prepare an SQL statement to select user data where the username matches
 $loginSQL = "SELECT user_id, password, username, role, user_type FROM users WHERE username = ?";
 
@@ -26,6 +46,14 @@ if ($result->num_rows > 0) {
         $_SESSION['username'] = $row['username'];
         $_SESSION['role'] = $row['role'];
         $_SESSION['user_type'] = $row['user_type'];
+        $_SESSION['user_status'] = "Online";
+
+        // Update user status in the database (if necessary)
+        $updateSQL = "UPDATE users SET user_status = 'Online' WHERE user_id = ?";
+        $updatestmt = $conn->prepare($updateSQL);
+        $updatestmt->bind_param("i", $_SESSION['user_id']);
+        $updatestmt->execute();
+        $updatestmt->close();
     
         echo json_encode(['success' => true, 'message' => 'Login successful!']);
     } else {
