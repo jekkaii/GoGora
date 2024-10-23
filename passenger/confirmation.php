@@ -7,28 +7,52 @@ $ride_type = $_POST['ride_type'];
 $plate_number = $_POST['plate_number'];
 $total_fare = $_POST['total_fare'];
 $capacity = $_POST['capacity'];
+$host = 'localhost';
+$username = 'root';
+$password = '';
+$dbname = 'gogora_db';
 
-// Retrieve reservation details based on ride_id and user_id
-if (isset($_POST['ride_id']) && isset($_POST['user_id'])) {
-    $ride_id = $_POST['ride_id'];
-    $user_id = $_POST['user_id'];
-    
-    // Here you can fetch reservation details if needed.
-    // For confirmation purposes, we will just display the ride details.
-    
-    $query = "SELECT * FROM rides WHERE ride_id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param('i', $ride_id);
-    $stmt->execute();
-    $ride_result = $stmt->get_result();
+$conn = new mysqli($host, $username, $password, $dbname);
 
-    if ($ride_result->num_rows > 0) {
-        $ride = $ride_result->fetch_assoc();
-    } else {
-        echo "Ride not found.";
-        exit();
-    }
+if ($conn->connect_error) {
+    error_log("Database connection failed: " . $conn->connect_error);
+    echo "Sorry, something went wrong. Please try again later.";
+    exit();
 }
+
+// Check if the form was submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['book-btn'])) {
+    // Get the ride details from the form
+    $ride_id = $_POST['ride_id'];
+    $user_id = 1; // Assuming a user ID of 1; this should come from the session or user login
+    $route = $_POST['route'];
+    $time = $_POST['time'];
+    $ride_type = $_POST['ride_type'];
+    
+    // Prepare and bind the statement
+    $stmt = $conn->prepare("INSERT INTO reservations (user_id, ride_id, reservation_time, status, payment_status) VALUES (?, ?, ?, ?, ?)");
+    $status = 'confirmed'; // or whatever logic you want for status
+    $payment_status = 'pending'; // or whatever logic you want for payment status
+    $reservation_time = date('Y-m-d H:i:s'); // Current time as reservation time
+
+    $stmt->bind_param("iisss", $user_id, $ride_id, $reservation_time, $status, $payment_status);
+    
+    // Execute the statement and check for success
+    if ($stmt->execute()) {
+        echo "Reservation successful!";
+        // Optionally redirect to a confirmation page or back to booking
+        header("Location: confirmation_success.php"); // Create this page for success message
+        exit();
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    // Close the statement
+    $stmt->close();
+}
+
+// Close the connection
+$conn->close();
 
 ?>
 

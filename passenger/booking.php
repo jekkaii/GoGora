@@ -223,21 +223,30 @@ $conn->close();
         <!-- Display Available Rides -->
         <h1>Choose a Ride</h1>
         <section class="ride-list">
-        <?php if (!empty($rides)): ?>
-        <?php foreach ($rides as $ride): ?>
-            <div class="ride-item">
-                <div class="ride-info">
-                    <p>Route: <?= htmlspecialchars($ride['route']); ?></p>
-                    <p>Time: <?= date('g:i A', strtotime($ride['time'])); ?></p>
-                    <p>Seats Available: <?= $ride['seats_available']; ?></p>
-                    <p>Ride Type: <?= $ride['ride_type']; ?></p>
-                    <button type="button" class="book-btn" onclick="bookRide(<?= $ride['ride_id']; ?>)">Book</button>
-                </div>
-            </div>
-        <?php endforeach; ?>
-        <?php else: ?>
-            <p>No rides available at the moment.</p>
-        <?php endif; ?>
+            <?php if (!empty($rides)): ?>
+                <?php foreach ($rides as $ride): ?>
+                    <div class="ride-item">
+                    <div class="ride-item">
+    <div class="ride-info">
+        <p>Route: <?= htmlspecialchars($ride['route']); ?></p>
+        <p>Time: <?= date('g:i A', strtotime($ride['time'])); ?></p>
+        <p>Seats Available: <?= $ride['seats_available']; ?></p>
+        <p>Ride Type: <?= $ride['ride_type']; ?></p>
+        
+        <form method="POST" action="confirmation.php"> <!-- Change action to the confirmation page -->
+            <input type="hidden" name="ride_id" value="<?= $ride['ride_id']; ?>">
+            <input type="hidden" name="route" value="<?= htmlspecialchars($ride['route']); ?>">
+            <input type="hidden" name="time" value="<?= $ride['time']; ?>">
+            <input type="hidden" name="ride_type" value="<?= $ride['ride_type']; ?>">
+            <button type="submit" class="book-btn" name="book-btn">Book</button>
+        </form>
+    </div>
+</div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No rides available at the moment.</p>
+            <?php endif; ?>
         </section>
         <script>
         function bookRide(rideId) {
