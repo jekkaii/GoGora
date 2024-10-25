@@ -1,5 +1,5 @@
 <?php
-// Capture ride details from POST data
+// Capture ride_id from POST data
 $ride_id = $_POST['ride_id'] ?? '';
 $host = 'localhost';
 $username = 'root';
@@ -16,7 +16,7 @@ if ($conn->connect_error) {
     exit();
 }
 
-// Initialize variables for ride details
+// Initialize variables for ride and reservation details
 $route = '';
 $time = '';
 $seats_available = '';
@@ -24,26 +24,52 @@ $ride_type = '';
 $plate_number = '';
 $total_fare = '';
 $capacity = '';
+$status = '';
+$payment_status = '';
+$payment_method = '';
+$departure = '';
+$queue = '';
 
-// Fetch ride details from the database
+// Fetch ride and reservation details from the database
 if ($ride_id) {
-    $stmt = $conn->prepare("SELECT route, time, seats_available, ride_type, plate_number, capacity FROM rides WHERE ride_id = ?");
+    $sql = "
+        SELECT r.route, r.time, r.seats_available, r.ride_type, r.plate_number, r.capacity, r.departure, r.queue,
+               res.status, res.payment_status, res.`total fare` AS total_fare, res.`payment method` AS payment_method
+        FROM rides AS r
+        JOIN reservations AS res ON r.ride_id = res.ride_id
+        WHERE r.ride_id = ?
+    ";
+    $stmt = $conn->prepare($sql);
+    
+    // Check if the statement was prepared successfully
+    if (!$stmt) {
+        echo "SQL preparation error: " . $conn->error;
+        exit();
+    }
+    
     $stmt->bind_param("i", $ride_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Check if ride details were found
+    // Check if ride and reservation details were found
     if ($result->num_rows > 0) {
-        $ride_details = $result->fetch_assoc();
+        $details = $result->fetch_assoc();
+        
         // Assign the retrieved values to variables
-        $route = $ride_details['route'];
-        $time = $ride_details['time'];
-        $seats_available = $ride_details['seats_available'];
-        $ride_type = $ride_details['ride_type'];
-        $plate_number = $ride_details['plate_number'];
-        $capacity = $ride_details['capacity'];
+        $route = $details['route'];
+        $time = $details['time'];
+        $seats_available = $details['seats_available'];
+        $ride_type = $details['ride_type'];
+        $plate_number = $details['plate_number'];
+        $capacity = $details['capacity'];
+        $departure = $details['departure'];
+        $status = $details['status'];
+        $payment_status = $details['payment_status'];
+        $total_fare = $details['total_fare'];
+        $payment_method = $details['payment_method'];
+        $queue = $details['queue'];
     } else {
-        echo "No ride details found for the selected ride.";
+        echo "No ride or reservation details found for the selected ride.";
         exit();
     }
 }
@@ -65,8 +91,8 @@ $conn->close();
     <div class="confirm-cont">
         <h1>Booking Confirmed!</h1>
         <img src="assets/confirm.png" alt="Confirmation">
-        <span class="label">Thank you for booking! Your queue number is:</span> <span class="value">07</span>
-        <p>Please be ready at your pickup location. You are currently no. <span class="value">7</span> in queue.</p>
+        <span class="label">Thank you for booking! Your queue number is:</span> <span class="value"><?= htmlspecialchars($queue); ?></span>
+        <p>Please be ready at your pickup location. You are currently no. <span class="value"><?= htmlspecialchars($queue); ?></span> in queue.</p>
 
         <div class="ride-details">
             <h1>Ride Details</h1>
@@ -74,13 +100,13 @@ $conn->close();
                 <span class="label">Plate No.:</span> <span class="value"><?= htmlspecialchars($plate_number); ?></span>
             </div>
             <div class="detail-item">
-                <span class="label">Departure:</span> <span class="value"><?= date('g:i A', strtotime($time)); ?></span>
+                <span class="label">Departure:</span> <span class="value"><?= date('g:i A', strtotime($departure)); ?></span>
             </div>
             <div class="detail-item">
                 <span class="label">Capacity:</span> <span class="value"><?= htmlspecialchars($capacity); ?></span>
             </div>
             <div class="detail-item">
-                <span class="label">Status:</span> <span class="value"><?= htmlspecialchars($seats_available); ?> seats available</span>
+                <span class="label">Status:</span> <span class="value"><?= htmlspecialchars($status); ?></span>
             </div>
             <div class="detail-item">
                 <span class="label">Route:</span> <span class="value"><?= htmlspecialchars($route); ?></span>
@@ -89,10 +115,10 @@ $conn->close();
                 <span class="label">Total Fare:</span> <span class="value">₱<?= htmlspecialchars($total_fare); ?></span>
             </div>
             <div class="detail-item">
-                <span class="label">Payment Method:</span> <span class="value">Cash</span>
+                <span class="label">Payment Method:</span> <span class="value"><?= htmlspecialchars($payment_method); ?></span>
             </div>
             <div class="detail-item">
-                <span class="label">Payment Status:</span> <span class="value">Pay on Arrival</span>
+                <span class="label">Payment Status:</span> <span class="value"><?= htmlspecialchars($payment_status); ?></span>
             </div>
         </div>
     </div>
