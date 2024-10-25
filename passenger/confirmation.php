@@ -34,7 +34,7 @@ $queue = '';
 if ($ride_id) {
     $sql = "
         SELECT r.route, r.time, r.seats_available, r.ride_type, r.plate_number, r.capacity, r.departure, r.queue,
-               res.status, res.payment_status, res.`total fare` AS total_fare, res.`payment method` AS payment_method
+               res.status, res.payment_status, res.`total_fare` AS total_fare, res.`payment_method` AS payment_method
         FROM rides AS r
         JOIN reservations AS res ON r.ride_id = res.ride_id
         WHERE r.ride_id = ?

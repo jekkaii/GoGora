@@ -235,24 +235,25 @@ $conn->close();
         <p>Seats Available: <?= $ride['seats_available']; ?></p>
         <p>Ride Type: <?= $ride['ride_type']; ?></p>
         
-        <form method="POST" action="confirmation.php"> <!-- Change action to the confirmation page -->
-            <input type="hidden" name="ride_id" value="<?= $ride['ride_id']; ?>">
-            <input type="hidden" name="route" value="<?= htmlspecialchars($ride['route']); ?>">
-            <input type="hidden" name="time" value="<?= $ride['time']; ?>">
-            <input type="hidden" name="ride_type" value="<?= $ride['ride_type']; ?>">
-            <button type="submit" class="book-btn" name="book-btn">Book</button>
-        </form>
+    <form method="POST" action="details.php"> <!-- Change action to the confirmation page -->
+        <input type="hidden" name="ride_id" value="<?= $ride['ride_id']; ?>">
+        <input type="hidden" name="route" value="<?= htmlspecialchars($ride['route']); ?>">
+        <input type="hidden" name="time" value="<?= $ride['time']; ?>">
+        <input type="hidden" name="ride_type" value="<?= $ride['ride_type']; ?>">
+        <button type="submit" class="book-btn" name="book-btn">Book</button>
+    </form>
 </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>No rides available at the moment.</p>
-            <?php endif; ?>
-        </section>
-        <script>
-        function bookRide(rideId) {
-            window.location.href = 'confirmation.php?ride_id=' + rideId; // Redirect to confirmation page with ride ID
-            }</script>
+</div>
+<?php endforeach; ?>
+<?php else: ?>
+    <p>No rides available at the moment.</p>
+    <?php endif; ?>
+</section>
+<script>
+    function bookRide(rideId) {
+        window.location.href = 'confirmation.php?ride_id=' + rideId; // Redirect to confirmation page with ride ID
+        }
+        </script>
     </div>
 </body>
 </html>
