@@ -18,7 +18,7 @@ if (isset($_POST['ride_id'])) {
     $ride_id = $_POST['ride_id'];
 
     // Fetch ride details along with reservation details
-    $query = "SELECT r.*, res.total_fare, res.payment_method, res.payment_status 
+    $query = "SELECT r.*, res.total_fare, res.payment_method, res.payment_status, res.status 
               FROM rides r 
               JOIN reservations res ON r.ride_id = res.ride_id 
               WHERE r.ride_id = ?";
@@ -37,14 +37,13 @@ if (isset($_POST['ride_id'])) {
     if ($ride_details) {
         $route = $ride_details['route'];
         $time = $ride_details['time'];
-        $seats_available = $ride_details['seats_available'];
-        $ride_type = $ride_details['ride_type'];
         $plate_number = $ride_details['plate_number'];
         $total_fare = $ride_details['total_fare'];
         $capacity = $ride_details['capacity'];
         $payment_method = $ride_details['payment_method'];
         $payment_status = $ride_details['payment_status'];
         $departure = $ride_details['departure'];  // Fetching departure from rides table
+        $status = $ride_details['status']; // Fetching status from reservations table
     } else {
         echo "No ride found with the selected ID.";
         exit();
@@ -77,7 +76,7 @@ $conn->close();
             </div>
             <div class="detail-item">
                 <span class="label">Departure:</span> 
-                <span class="value"><?= date('g:i A', strtotime($departure)); ?></span> <!-- Updated to use $departure -->
+                <span class="value"><?= date('g:i A', strtotime($departure)); ?></span>
             </div>
             <div class="detail-item">
                 <span class="label">Capacity:</span> 
@@ -85,7 +84,7 @@ $conn->close();
             </div>
             <div class="detail-item">
                 <span class="label">Status:</span> 
-                <span class="value"><?= htmlspecialchars($seats_available); ?> seats available</span>
+                <span class="value"><?= htmlspecialchars($status); ?></span> <!-- Only status displayed -->
             </div>
             <div class="detail-item">
                 <span class="label">Route:</span> 
