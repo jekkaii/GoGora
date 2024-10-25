@@ -28,8 +28,10 @@ body {
 }
 
 .book-head h1 {
+    color: #FDBE34;
     font-size: 2.5em;
     margin: 0;
+    padding-top: 20px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -40,20 +42,19 @@ body {
     height: 40px;
 }
 
-.logout-link{
+.logout-link {
     display: flex;
     align-items: center;
     text-align: center;
     position: relative;
 }
 
-.logout-link a{
+.logout-link a {
     text-decoration: none;
     color: white;
 }
 
 .book-cont {
-  
     display: flex;
     margin-bottom: 50px;
     flex-direction: column;
@@ -64,8 +65,8 @@ body {
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(10px);
     padding: 20px;
-    height: 600px; 
-    overflow-y: auto; 
+    height: 600px;
+    overflow-y: auto;
     margin-top: 50px !important;
 }
 
@@ -130,23 +131,22 @@ body {
 
 /* Header */
 .book-head {
-    background-color: #0071CE;
+    background-color: #103166;
     color: #FFF;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: fixed; /* Keep header fixed */
+    position: fixed;
     top: 0;
-    width: 100%; /* Ensure header takes full width */
-    z-index: 10; /* Keep header on top */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    z-index: 10;
 }
 
-/* Add margin below the header */
 .book-cont {
     padding: 20px;
-    margin-top: 160px; /* Ensure enough space between the fixed header and content */
+    margin-top: 160px;
+    /* Ensure enough space between the fixed header and content */
     text-align: center;
 }
 
@@ -156,7 +156,9 @@ form {
     margin-bottom: 30px;
 }
 
-form label, form select, form button {
+form label,
+form select,
+form button {
     font-size: 16px;
     margin: 0 10px 10px 0;
 }
@@ -200,43 +202,4 @@ form label, form select, form button {
 .book-btn:hover {
     background-color: #005bb5;
 }
-
-
-/* Confirmation */
-#confirm-bod {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    flex-direction: column;
-    align-items: center;
-    background: #F2F7FF;
-    height: 100vh;
-    padding-top: 70px;
-}
-
-.confirm-cont {
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-
-.confirm-cont h1 {
-    color: #0071CE;
-}
-
-.confirm-cont p {
-    font-weight: bold;
-}
-
-.confirm-cont img {
-    display: block;
-    margin: 20px auto;
-    max-width: 70px;
-    height: auto;
-}
-
 

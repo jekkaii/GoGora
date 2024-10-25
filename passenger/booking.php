@@ -180,7 +180,7 @@ $conn->close();
         <h1>GoGora</h1>
         <a href="#"><img src="assets/profile.png" alt="Profile"></a>
         <div class="logout-link">
-            <a href="includes/logout.php"><img src="assets/logout.png">Logout</a>
+            <a href="includes/logout.php"><img src="assets/logout.png"></a>
         </div>
     </header>
 
@@ -229,7 +229,6 @@ $conn->close();
             <?php if (!empty($rides)): ?>
                 <?php foreach ($rides as $ride): ?>
                     <div class="ride-item">
-                    <div class="ride-item">
     <div class="ride-info">
         <p>Route: <?= htmlspecialchars($ride['route']); ?></p>
         <p>Time: <?= date('g:i A', strtotime($ride['time'])); ?></p>
@@ -243,7 +242,6 @@ $conn->close();
             <input type="hidden" name="ride_type" value="<?= $ride['ride_type']; ?>">
             <button type="submit" class="book-btn" name="book-btn">Book</button>
         </form>
-    </div>
 </div>
                     </div>
                 <?php endforeach; ?>

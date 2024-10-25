@@ -1,59 +1,56 @@
 <?php
 // Capture ride details from POST data
-$route = $_POST['route'];
-$time = $_POST['time'];
-$seats_available = $_POST['seats_available'];
-$ride_type = $_POST['ride_type'];
-$plate_number = $_POST['plate_number'];
-$total_fare = $_POST['total_fare'];
-$capacity = $_POST['capacity'];
+$ride_id = $_POST['ride_id'] ?? '';
 $host = 'localhost';
 $username = 'root';
 $password = '';
 $dbname = 'gogora_db';
 
+// Create a new database connection
 $conn = new mysqli($host, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
     error_log("Database connection failed: " . $conn->connect_error);
     echo "Sorry, something went wrong. Please try again later.";
     exit();
 }
 
-// Check if the form was submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['book-btn'])) {
-    // Get the ride details from the form
-    $ride_id = $_POST['ride_id'];
-    $user_id = 1; // Assuming a user ID of 1; this should come from the session or user login
-    $route = $_POST['route'];
-    $time = $_POST['time'];
-    $ride_type = $_POST['ride_type'];
-    
-    // Prepare and bind the statement
-    $stmt = $conn->prepare("INSERT INTO reservations (user_id, ride_id, reservation_time, status, payment_status) VALUES (?, ?, ?, ?, ?)");
-    $status = 'confirmed'; // or whatever logic you want for status
-    $payment_status = 'pending'; // or whatever logic you want for payment status
-    $reservation_time = date('Y-m-d H:i:s'); // Current time as reservation time
+// Initialize variables for ride details
+$route = '';
+$time = '';
+$seats_available = '';
+$ride_type = '';
+$plate_number = '';
+$total_fare = '';
+$capacity = '';
 
-    $stmt->bind_param("iisss", $user_id, $ride_id, $reservation_time, $status, $payment_status);
-    
-    // Execute the statement and check for success
-    if ($stmt->execute()) {
-        echo "Reservation successful!";
-        // Optionally redirect to a confirmation page or back to booking
-        header("Location: confirmation_success.php"); // Create this page for success message
-        exit();
+// Fetch ride details from the database
+if ($ride_id) {
+    $stmt = $conn->prepare("SELECT route, time, seats_available, ride_type, plate_number, capacity FROM rides WHERE ride_id = ?");
+    $stmt->bind_param("i", $ride_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if ride details were found
+    if ($result->num_rows > 0) {
+        $ride_details = $result->fetch_assoc();
+        // Assign the retrieved values to variables
+        $route = $ride_details['route'];
+        $time = $ride_details['time'];
+        $seats_available = $ride_details['seats_available'];
+        $ride_type = $ride_details['ride_type'];
+        $plate_number = $ride_details['plate_number'];
+        $capacity = $ride_details['capacity'];
     } else {
-        echo "Error: " . $stmt->error;
+        echo "No ride details found for the selected ride.";
+        exit();
     }
-
-    // Close the statement
-    $stmt->close();
 }
 
-// Close the connection
+// Close the statement and connection
+$stmt->close();
 $conn->close();
-
 ?>
 
 <!DOCTYPE html>

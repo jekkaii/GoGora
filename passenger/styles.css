@@ -294,3 +294,39 @@ h2 {
 .book-btn:hover {
     background-color: #2A2C78;
 }
+
+/* Confirmation */
+#confirm-bod {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    flex-direction: column;
+    align-items: center;
+    background: #F2F7FF;
+    height: 100vh;
+    padding-top: 70px;
+}
+
+.confirm-cont {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.confirm-cont h1 {
+    color: #0071CE;
+}
+
+.confirm-cont p {
+    font-weight: bold;
+}
+
+.confirm-cont img {
+    display: block;
+    margin: 20px auto;
+    max-width: 70px;
+    height: auto;
+}
