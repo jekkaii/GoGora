@@ -11,7 +11,7 @@
     <div class="container">
       <div class="left-section">
         <div class="promo-content">
-          <img src="your-logo.png" alt="GoGora Logo" class="promo-logo">
+          <img src="/assets/logo.png" alt="GoGora Logo" class="promo-logo">
           <h1 class="promo-title">GoGora</h1>
           <p class="promo-subtitle">Your journey, our pride!</p>
         </div>

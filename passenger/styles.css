@@ -28,12 +28,20 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.promo-title {
+    margin-top: -110px; 
+    font-size: 2.5rem;  
+    color: 091057;     
+}
+
 /* Left Section */
 .left-section {
+    padding-top: 50px; 
+    flex-direction: column;
     width: 55%;
     background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%);
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     color: #091057;
     font-weight: 700;
