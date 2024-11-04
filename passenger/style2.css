@@ -146,7 +146,6 @@ body {
 .book-cont {
     padding: 20px;
     margin-top: 160px;
-    /* Ensure enough space between the fixed header and content */
     text-align: center;
 }
 
@@ -202,4 +201,3 @@ form button {
 .book-btn:hover {
     background-color: #005bb5;
 }
-

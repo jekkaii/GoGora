@@ -64,7 +64,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Details</title>
-    <link rel="icon" type="image/png" href="/assets/favicon.png"> 
+    <link rel="icon" type="image/png" href="assets/favicon.png"> 
     <link rel="stylesheet" href="styles.css">
 </head>
 <body id="details-bod">
@@ -85,7 +85,7 @@ $conn->close();
             </div>
             <div class="detail-item">
                 <span class="label">Status:</span> 
-                <span class="value"><?= htmlspecialchars($status); ?></span> <!-- Only status displayed -->
+                <span class="value"><?= htmlspecialchars($status); ?></span>
             </div>
             <div class="detail-item">
                 <span class="label">Route:</span> 

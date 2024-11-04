@@ -29,14 +29,14 @@ body {
 }
 
 .promo-title {
-    margin-top: -110px; 
-    font-size: 2.5rem;  
-    color: 091057;     
+    margin-top: 30px;
+    font-size: 2.5rem;
+    color: #091057;
 }
 
 /* Left Section */
 .left-section {
-    padding-top: 50px; 
+    padding-top: 50px;
     flex-direction: column;
     width: 55%;
     background: linear-gradient(135deg, #A1C4FD 0%, #C2E9FB 100%);
@@ -171,7 +171,6 @@ h2 {
 /* Login Text */
 .login-text {
     margin-top: 2px;
-    /* Further reduced for closer spacing */
     text-align: center;
 }
 
@@ -196,7 +195,6 @@ h2 {
     cursor: pointer;
     transition: background 0.3s ease;
     margin-top: 20px;
-    /* Optional: adds space above the button */
 }
 
 .dashboard-btn:hover {
@@ -249,23 +247,19 @@ h2 {
 .ride-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* Two columns */
     gap: 20px;
-    /* Gap between cards */
 }
 
 /* Ride Cards */
 .ride-card {
     background: #fff;
     padding: 30px;
-    /* Increased padding for better spacing */
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    /* Space between elements */
 }
 
 /* Title and Text */
@@ -273,14 +267,12 @@ h2 {
     font-size: 1.5rem;
     color: #3A3D98;
     margin-bottom: 10px;
-    /* Add margin for better separation */
 }
 
 .ride-card p {
     font-size: 1rem;
     color: #444;
     margin-bottom: 5px;
-    /* Space between paragraphs */
 }
 
 /* Book Button */
@@ -295,7 +287,6 @@ h2 {
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 15px;
-    /* Space above the button */
 }
 
 /* Hover Effect for Button */

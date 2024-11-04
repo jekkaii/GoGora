@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoGora</title>
-    <link rel="icon" type="image/png" href="/assets/favicon.png"> 
+    <link rel="icon" type="image/png" href="assets/favicon.png"> 
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div class="container">
       <div class="left-section">
         <div class="promo-content">
-          <img src="/assets/logo.png" alt="GoGora Logo" class="promo-logo">
+          <img src="assets/logo.png" alt="GoGora Logo" class="promo-logo">
           <h1 class="promo-title">GoGora</h1>
           <p class="promo-subtitle">Your journey, our pride!</p>
         </div>
