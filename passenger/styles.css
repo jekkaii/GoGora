@@ -28,8 +28,11 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
+.promo-content img {
+    margin-top: 110px;
+}
+
 .promo-title {
-    margin-top: 30px;
     font-size: 2.5rem;
     color: #091057;
 }
