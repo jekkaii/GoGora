@@ -78,7 +78,7 @@ CREATE TABLE `reservations` (
   `status` enum('Active','Canceled','Completed') NOT NULL,
   `payment_status` enum('Paid','Pending','Not Paid') NOT NULL,
   `total_fare` int NOT NULL,
-  `payment method` enum('Manual','GCASH') NOT NULL,
+  `payment_method` enum('CASH','GCASH') NOT NULL,
   PRIMARY KEY (`reservation_id`),
   KEY `user_id_idx` (`user_id`),
   KEY `ride_id_idx` (`ride_id`),

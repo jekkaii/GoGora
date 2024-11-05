@@ -1,17 +1,5 @@
 <?php
-// Database connection
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'gogora_db';
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
-    echo "Sorry, something went wrong. Please try again later.";
-    exit();
-}
+require_once('includes/db.php');
 
 // Get the ride_id from the POST data
 if (isset($_POST['ride_id'])) {
@@ -28,7 +16,7 @@ if (isset($_POST['ride_id'])) {
         echo "Sorry, something went wrong. Please try again later.";
         exit();
     }
-    
+
     $stmt->bind_param('i', $ride_id);
     $stmt->execute();
     $ride_details = $stmt->get_result()->fetch_assoc();
@@ -53,10 +41,10 @@ if (isset($_POST['ride_id'])) {
     exit();
 }
 
-// Close the statement and connection
 $stmt->close();
 $conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

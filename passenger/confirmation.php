@@ -1,20 +1,8 @@
 <?php
+require_once('includes/db.php');
+
 // Capture ride_id from POST data
 $ride_id = $_POST['ride_id'] ?? '';
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'gogora_db';
-
-// Create a new database connection
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
-    echo "Sorry, something went wrong. Please try again later.";
-    exit();
-}
 
 // Initialize variables for ride and reservation details
 $route = '';
@@ -46,7 +34,7 @@ if ($ride_id) {
         echo "SQL preparation error: " . $conn->error;
         exit();
     }
-    
+
     $stmt->bind_param("i", $ride_id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -74,7 +62,6 @@ if ($ride_id) {
     }
 }
 
-// Close the statement and connection
 $stmt->close();
 $conn->close();
 ?>
@@ -122,6 +109,7 @@ $conn->close();
                 <span class="label">Payment Status:</span> <span class="value"><?= htmlspecialchars($payment_status); ?></span>
             </div>
         </div>
+        <button type="button" class="confirm-btn" onclick="window.location.href='booking.php'">Return to Home</button>
     </div>
 </body>
 </html>

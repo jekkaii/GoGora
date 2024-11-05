@@ -1,17 +1,5 @@
 <?php
-// Database connection
-$host = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'gogora_db';
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
-    echo "Sorry, something went wrong. Please try again later.";
-    exit();
-}
+require_once('includes/db.php');
 
 // Initialize filtered rides variable
 $rides = [];
@@ -52,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $types .= 's';
     }
 
-   
+    // Time Filter
     if ($time !== 'All') {
         // Extract the hour from the selected time and create a time range for that hour
         $start_time = date('H:i:s', strtotime($time)); 
