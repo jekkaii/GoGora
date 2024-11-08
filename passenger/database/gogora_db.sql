@@ -49,7 +49,7 @@ CREATE TABLE `users` (
   `username` varchar(10) NOT NULL,
   `firstname` varchar(10) NOT NULL,
   `lastname` varchar(10) NOT NULL,
-  `password` varchar(8) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `email` varchar(17) NOT NULL,
   `role` enum('Student','Faculty','Employee') NOT NULL,
   `user_type` enum('Regular','Priority') NOT NULL,

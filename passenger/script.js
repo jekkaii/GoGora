@@ -11,10 +11,20 @@ document.getElementById('show-register-form').addEventListener('click', function
     document.getElementById('registration-form').style.display = 'block';
 });
 
+function validatePasswordLength(password) {
+    return password.length >= 8 && password.length <= 16;
+}
 
 // Handle registration form submission
 document.getElementById('registration-form').addEventListener('submit', function (event) {
-    event.preventDefault();
+    const password = document.getElementById('password').value;
+
+    // Check password length
+    if (!validatePasswordLength(password)) {
+        alert('Password must be between 8 and 16 characters.');
+        event.preventDefault(); // Prevent form submission
+        return;
+    }
 
     // Create a FormData object to collect the form data
     const formData = new FormData(this);
@@ -24,16 +34,13 @@ document.getElementById('registration-form').addEventListener('submit', function
         method: 'POST',
         body: formData
     })
-        .then(response => response.json())  // Expect a JSON response from PHP
+        .then(response => response.json())
         .then(data => {
-            // Use default confirm dialog for messages
             if (data.success) {
                 if (confirm(data.message)) {
-                    // If registration is successful, redirect to the login page or another desired location
                     window.location.href = 'index.php';
                 }
             } else {
-                // Show error message in a confirm dialog
                 confirm(data.message);
             }
         })
@@ -45,35 +52,28 @@ document.getElementById('registration-form').addEventListener('submit', function
 
 // Handle login form submission
 document.getElementById('login-form-element').addEventListener('submit', function (event) {
-    event.preventDefault();
+    const password = document.getElementById('login-password').value;
 
-    // Collect form data
+    // Check password length
+    if (!validatePasswordLength(password)) {
+        alert('Password must be between 8 and 15 characters.');
+        event.preventDefault(); // Prevent form submission
+        return;
+    }
+
     const formData = new FormData(this);
 
-    // Debugging: Log to see if the form is being submitted
-    console.log('Login form submitted.');
-
-    // Send login data via AJAX to login.php
     fetch('includes/login.php', {
         method: 'POST',
         body: formData
     })
-        .then(response => {
-            // Debugging: Check if response is OK (status 200)
-            console.log('Response received:', response);
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            // Debugging: Log the response data
-            console.log('Response data:', data);
-
             if (data.success) {
-                // If login is successful, redirect to the homepage or desired location
                 if (confirm(data.message)) {
-                    window.location.href = 'booking.php';  // Redirect to booking page
+                    window.location.href = 'booking.php'; // Redirect to booking page
                 }
             } else {
-                // Show error message in a confirm dialog
                 confirm(data.message);
             }
         })

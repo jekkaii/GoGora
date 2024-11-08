@@ -41,11 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // If no errors, proceed with inserting the user
     if (empty($errors)) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         // Insert user data into the database
         $insertQuery = "INSERT INTO users (username, firstname, lastname, password, email, role, user_type) VALUES (?, ?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($insertQuery);
         // Use the plain password directly
-        $stmt->bind_param("sssssss", $username, $firstName, $lastName, $password, $email, $role, $userType);
+        $stmt->bind_param("sssssss", $username, $firstName, $lastName, $hashedPassword, $email, $role, $userType);
     
         if ($stmt->execute()) {
             // Return a JSON response for successful registration

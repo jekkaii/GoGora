@@ -18,7 +18,7 @@
       </div>
       <div class="right-section">
         <!-- Registration Form -->
-        <form id="registration-form" action="includes/register.php" method="POST">
+        <form id="registration-form" method="POST" action="includes/register.php">
         <h2>Get Started Today</h2>
           <div class="input-group name-group">
             <div class="first-name">
@@ -64,7 +64,7 @@
 <div class="form-container" id="login-form" style="display: none;">
   <h2>Welcome Back</h2>
   <!-- Login Form -->
-  <form id="login-form-element" method="POST">
+  <form id="login-form-element" method="POST" action="includes/login.php">
     <div class="input-group">
       <label for="login-username">Username</label>
       <input type="text" id="login-username" name="username" placeholder="Enter your username" required>

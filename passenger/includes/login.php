@@ -1,6 +1,6 @@
 <?php
-require('db.php');  // Include database connection
-session_start();    // Start the session to manage user login state
+require('db.php');  
+session_start();
 
 // Retrieve the username and password from the form submission
 $username = $_POST['username'] ?? '';
@@ -40,7 +40,7 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();  // Fetch the row of data for the user
 
     // Verify the input password matches the stored password (no hashing in your case)
-    if ($password === $row['password']) {
+    if (password_verify($password, $row['password'])) {
         // Successful login, return success as JSON
         $_SESSION['user_id'] = $row['user_id'];
         $_SESSION['username'] = $row['username'];
@@ -65,6 +65,6 @@ if ($result->num_rows > 0) {
     echo json_encode(['success' => false, 'message' => 'User not found']);
 }
 
-$loginstmt->close();  // Close the prepared statement
-$conn->close();  // Close the database connection
+$loginstmt->close(); 
+$conn->close(); 
 ?>
