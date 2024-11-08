@@ -4,11 +4,15 @@ require_once('includes/db.php');
 // Initialize filtered rides variable
 $rides = [];
 
+// Check if the request is AJAX
+$isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
+
 // Check if form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" || $isAjax) {
     $route = $_POST['route'];  // typed route from search bar
     $ride_type = $_POST['ride_type']; // selected ride Type
     $time = $_POST['time'];  // selected specific time
+    
 
     // Initialize base query
     $query = "SELECT * FROM rides WHERE 1=1";
@@ -79,6 +83,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+ // Check if AJAX request, and return JSON
+ if ($isAjax) {
+    header('Content-Type: application/json');
+    echo json_encode($rides);
+    exit; // Stop further HTML rendering
+}
+
+
 $conn->close();
 ?>
 
@@ -138,30 +150,71 @@ $conn->close();
 
         <!-- Display Available Rides -->
         <h1>Choose a Ride</h1>
-        <section class="ride-list">
-            <?php if (!empty($rides)): ?>
-                <?php foreach ($rides as $ride): ?>
-                    <div class="ride-item">
+        <section class="ride-list" id="rideListContainer">
+    <p>Loading available rides...</p> <!-- Temporary loading text -->
+</section>
+
+    </div>
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const rideListContainer = document.getElementById("rideListContainer");
+
+    // Function to fetch and display rides
+    function fetchRides() {
+        fetch("booking.php", {
+            method: "POST",
+            headers: {
+                "X-Requested-With": "XMLHttpRequest" // Tells PHP that this is an AJAX request
+            },
+            body: new URLSearchParams(new FormData(document.querySelector("form"))) // Send form data
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Clear the container
+            rideListContainer.innerHTML = "";
+
+            if (data.length > 0) {
+                // Create HTML for each ride and append it to the container
+                data.forEach(ride => {
+                    const rideItem = document.createElement("div");
+                    rideItem.classList.add("ride-item");
+
+                    rideItem.innerHTML = `
                         <div class="ride-info">
-                            <p>Route: <?= htmlspecialchars($ride['route']); ?></p>
-                            <p>Time: <?= date('g:i A', strtotime($ride['time'])); ?></p>
-                            <p>Seats Available: <?= $ride['seats_available']; ?></p>
-                            <p>Ride Type: <?= $ride['ride_type']; ?></p>
-                            
-                            <form method="POST" action="details.php"> <!-- Change action to the confirmation page -->
-                                <input type="hidden" name="ride_id" value="<?= $ride['ride_id']; ?>">
-                                <input type="hidden" name="route" value="<?= htmlspecialchars($ride['route']); ?>">
-                                <input type="hidden" name="time" value="<?= $ride['time']; ?>">
-                                <input type="hidden" name="ride_type" value="<?= $ride['ride_type']; ?>">
+                            <p>Route: ${ride.route}</p>
+                            <p>Time: ${new Date('1970-01-01T' + ride.time + 'Z').toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+                            <p>Seats Available: ${ride.seats_available}</p>
+                            <p>Ride Type: ${ride.ride_type}</p>
+                            <form method="POST" action="details.php">
+                                <input type="hidden" name="ride_id" value="${ride.ride_id}">
+                                <input type="hidden" name="route" value="${ride.route}">
+                                <input type="hidden" name="time" value="${ride.time}">
+                                <input type="hidden" name="ride_type" value="${ride.ride_type}">
                                 <button type="submit" class="book-btn" name="book-btn">Book</button>
                             </form>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>No rides available at the moment.</p>
-            <?php endif; ?>
-        </section>
-    </div>
+                    `;
+                    rideListContainer.appendChild(rideItem);
+                });
+            } else {
+                rideListContainer.innerHTML = "<p>No rides available at the moment.</p>";
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching rides:", error);
+            rideListContainer.innerHTML = "<p>Error loading rides. Please try again later.</p>";
+        });
+    }
+
+    // Fetch rides initially
+    fetchRides();
+
+    // Add event listener to the form to fetch rides on submit without page reload
+    document.querySelector("form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the default form submission
+        fetchRides(); // Fetch rides based on updated form data
+    });
+});
+</script>
 </body>
 </html>
