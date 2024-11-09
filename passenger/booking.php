@@ -179,10 +179,26 @@ document.addEventListener("DOMContentLoaded", function() {
                     const rideItem = document.createElement("div");
                     rideItem.classList.add("ride-item");
 
+                    // Ensure the time is formatted correctly
+                    let formattedTime = 'Invalid time format';
+
+                    if (ride.time) {
+                        // Assuming ride.time is in "YYYY-MM-DD HH:mm:ss" format
+                        const timePart = ride.time.split(' ')[1];  // Extract the "HH:mm:ss" part
+                        const timeDate = new Date('1970-01-01T' + timePart + 'Z'); // Create a valid date string
+
+                        // Check if the date is valid
+                        if (!isNaN(timeDate.getTime())) {
+                            // If valid, format the time
+                            formattedTime = timeDate.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'});
+                        }
+                    }
+
+                    // Add the formatted time to the ride item
                     rideItem.innerHTML = `
                         <div class="ride-info">
                             <p>Route: ${ride.route}</p>
-                            <p>Time: ${new Date('1970-01-01T' + ride.time + 'Z').toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</p>
+                            <p>Time: ${formattedTime}</p>
                             <p>Seats Available: ${ride.seats_available}</p>
                             <p>Ride Type: ${ride.ride_type}</p>
                             <form method="POST" action="details.php">
@@ -215,6 +231,7 @@ document.addEventListener("DOMContentLoaded", function() {
         fetchRides(); // Fetch rides based on updated form data
     });
 });
+
 </script>
 </body>
 </html>

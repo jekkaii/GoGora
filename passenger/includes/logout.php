@@ -15,12 +15,12 @@ if (isset($_SESSION['user_id'])) {
     session_destroy();
 
     // Redirect to the login page or another appropriate page
-    header(header: "Location: ../index.php");
+    header("Location: ../index.php");
     $conn->close();  // Close the database connection
     exit;
 } else {
     // User is not logged in, redirect to the login page
-    header(header: "Location: ../index.php");
+    header("Location: ../index.php");
     $conn->close();  // Close the database connection
     exit;
 }
