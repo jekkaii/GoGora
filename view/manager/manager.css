@@ -1,0 +1,107 @@
+/* General Styles for Manager Side */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #002ea7; /* Deep blue background for Manager */
+    margin: 0;
+}
+
+/* Manager Container */
+.manager-container {
+    display: flex;
+    width: 85%;
+    height: 70%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Manager Left Panel */
+.manager-left-panel {
+    flex: 1;
+    background-color: #002ea7; /* Matches the overall theme */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.manager-jeepney-image {
+    max-width: 90%;
+    height: auto;
+    display: block;
+}
+
+/* Manager Right Panel */
+.manager-right-panel {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.manager-login-box {
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    border: 30x solid #f4f4f4;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #002ea7;
+}
+
+/* Header: Logo and Highlight */
+.manager-login-box h1 {
+    font-size: 50px;
+    margin-bottom: 25px;
+    color: #ffffff;
+}
+
+.manager-logo-highlight {
+    color: #ffaa00; /* Highlight for 'Go' */
+}
+
+/* Form Inputs for Manager */
+.manager-login-form .manager-input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    outline: none;
+}
+
+.manager-login-form .manager-input:focus {
+    border-color: #002ea7;
+}
+
+/* Manager Login Button */
+.manager-login-form .manager-login-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #002ea7;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.manager-login-form .manager-login-button:hover {
+    background-color: #ffaa00;
+}
