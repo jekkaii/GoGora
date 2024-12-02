@@ -105,3 +105,123 @@ body {
 .manager-login-form .manager-login-button:hover {
     background-color: #ffaa00;
 }
+
+/* Scoped Styles for Manager Dashboard */
+
+/* Manager Dashboard Styles */
+
+/* General Layout */
+
+.manager-dashboard {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    height: 100vh; /* Ensures the layout fills the entire screen */
+}
+/* Sidebar */
+.sidebar {
+    width: 20%;
+    height: 100vh;
+    background-color: #002366; /* Navy Blue */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .logo img {
+    width: 10px;
+    height: 10px;
+    margin-right: px;
+}
+
+.sidebar .logo span {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sidebar .menu p {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.sidebar .menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .menu ul li {
+    margin: 15px 0;
+}
+
+.sidebar .menu ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+.sidebar .menu ul li a:hover {
+    text-decoration: underline;
+}
+
+.sidebar .logout {
+    margin-top: auto;
+    text-align: center;
+}
+
+.sidebar .logout a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Main Content */
+.main-content {
+    width: 80%; /* Remaining width after the sidebar */
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Dashboard Content */
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #002366; /* Navy Blue */
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    flex: 1 1 calc(25% - 20px); /* 4 cards in a row with space */
+    background-color: #4da6ff; /* Light Blue */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.card h2 {
+    font-size: 36px;
+    margin: 0;
+}
