@@ -1,3 +1,13 @@
+:root {
+    --primary-color: #2851B3;
+    --secondary-color: #4B7BFB;
+    --background-color: #F5F7FF;
+    --text-color: #333;
+    --white: #fff;
+    --light-gray: #f0f0f0;
+    --border-color: #e0e0e0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +16,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 .container {
@@ -16,53 +27,72 @@ body {
 
 .sidebar {
     width: 250px;
-    background-color: #1a237e;
-    color: white;
-    padding: 20px 0;
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 20px;
     display: flex;
     flex-direction: column;
 }
 
 .logo {
-    padding: 0 20px;
-    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
-.manager-label {
-    background-color: #5c6bc0;
-    padding: 10px 20px;
+.logo-image {
+    width: 40px;
+    height: 40px;
+    background-color: var(--white);
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.logo h1 {
+    font-size: 24px;
+}
+
+.nav-title {
+    font-size: 12px;
+    opacity: 0.7;
     margin-bottom: 10px;
 }
 
-.sidebar nav ul {
-    list-style: none;
+.sidebar ul {
+    list-style-type: none;
 }
 
-.sidebar nav ul li a {
+.sidebar li {
+    margin-bottom: 5px;
+}
+
+.sidebar a {
+    color: var(--white);
+    text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 12px 20px;
-    color: white;
-    text-decoration: none;
-    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-.sidebar nav ul li a:hover,
-.sidebar nav ul li a.active {
-    background-color: #283593;
+.sidebar a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.icon {
+    margin-right: 10px;
+    font-size: 18px;
 }
 
 .logout {
     margin-top: auto;
-    padding: 20px;
-}
-
-.logout a {
-    color: white;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
 .content {
@@ -70,74 +100,71 @@ body {
     padding: 20px;
 }
 
-.header {
-    margin-bottom: 30px;
-}
-
-.form-container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.form-container h2 {
-    color: #1a237e;
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.form-group {
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    color: #666;
+.back-link {
+    color: var(--primary-color);
+    text-decoration: none;
 }
 
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+.accounts, .blacklisted {
+    background-color: var(--white);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.add-user {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 14px;
 }
 
-.button-group {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 30px;
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.btn-primary,
-.btn-secondary {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+th, td {
+    text-align: left;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
     font-weight: bold;
+    color: #666;
 }
 
-.btn-primary {
-    background-color: #1a237e;
-    color: white;
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
 }
 
-.btn-secondary {
-    background-color: #e0e0e0;
-    color: #333;
+.edit {
+    color: var(--secondary-color);
 }
 
-.btn-primary:hover {
-    background-color: #283593;
-}
-
-.btn-secondary:hover {
-    background-color: #bdbdbd;
+.delete {
+    color: #ff4444;
 }
