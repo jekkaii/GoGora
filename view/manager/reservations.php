@@ -9,7 +9,7 @@
    <head>
        <meta charset="UTF-8">
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <title>GoGora - Manage Routes</title>
+       <title>GoGora - Manage Reservations</title>
        <link rel="stylesheet" href="../manager/css/styles.css">
    </head>
    <body>
@@ -33,37 +33,60 @@
            </nav>
            <main class="content">
                <header>
-                   <h2>Manage Routes</h2>
+                   <h2>Reservations</h2>
                    <a href="../manager/dashboard.php" class="back-link">Back to Dashboard</a>
                </header>
                <section class="accounts">
                    <div class="section-header">
-                       <h3>Routes</h3>
-                       <button class="add-user">Add Route</button>
+                       <h3>Reservations</h3>
                    </div>
                    <table>
                        <thead>
                            <tr>
-                               <th>Plate No.</th>
-                               <th>Type</th>
-                               <th>From:</th>
-                               <th>To:</th>
+                               <th>Reservation ID</th>
+                               <th>Route</th>
                                <th>Schedule</th>
-                               <th>Seats</th>
+                               <th>Status</th>
+                               <th>Payment Status</th>
                                <th>Action</th>
                            </tr>
                        </thead>
                        <tbody>
                            <tr>
-                               <td>ABC1234</td>
-                               <td>Jeepney</td>
-                               <td>Igorot Park</td>
-                               <td>Bakakeng</td>
-                               <td>10:00 am to 11:00 am</td>
-                               <td>22</td>
+                               <td>301</td>
+                               <td>Bakakeng to Igorot Park</td>
+                               <td>2024-11-25 08:00 AM</td>
+                               <td>Active</td>
+                               <td>Paid</td>
                                <td>
                                    <button class="action-btn edit">✏️</button>
-                                   <button class="action-btn delete">🗑️</button>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+               </section>
+               <section class="blacklisted">
+                   <div class="section-header">
+                       <h3>Available Rides</h3>
+                   </div>
+                   <table>
+                       <thead>
+                           <tr>
+                               <th>Ride ID</th>
+                               <th>Route</th>
+                               <th>Schedule</th>
+                               <th>Seats Available</th>
+                               <th>Action</th>
+                           </tr>
+                       </thead>
+                       <tbody>
+                           <tr>
+                               <td>201</td>
+                               <td>Bakakeng to Igorot Park</td>
+                               <td>2024-11-25 08:00 AM</td>
+                               <td>5</td>
+                               <td>
+                                   <button class="action-btn edit">✏️</button>
                                </td>
                            </tr>
                        </tbody>

@@ -10,24 +10,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoGora - Manage Accounts</title>
-    <link rel="stylesheet" href="../manager/css/account.css">
+    <link rel="stylesheet" href="../manager/css/styles.css">
 </head>
 <body>
     <div class="container">
         <nav class="sidebar">
             <div class="logo">
-                <div class="logo-image">Go</div>
                 <h1>GoGora</h1>
             </div>
             <div class="nav-title">MANAGER</div>
             <ul>
                 <li><a href="../manager/dashboard.php"><span class="icon">📊</span> Dashboard</a></li>
                 <li><a href="../manager/ride.php"><span class="icon">🚗</span> Ride Management</a></li>
-                <li><a href="#"><span class="icon">👥</span> Passenger Management</a></li>
                 <li><a href="../manager/route.php"><span class="icon">🛣️</span> Route Management</a></li>
-                <li><a href="#"><span class="icon">👤</span> Account Management</a></li>
-                <li><a href="#"><span class="icon">⭐</span> Priority Lane Management</a></li>
-                <li><a href="#"><span class="icon">📝</span> Reservations</a></li>
+                <li><a href="../manager/account.php"><span class="icon">👤</span> Account Management</a></li>
+                <li><a href="../manager/priority.php"><span class="icon">⭐</span> Priority Lane Management</a></li>
+                <li><a href="../manager/reservations.php"><span class="icon">📝</span> Reservations</a></li>
             </ul>
             <div class="logout">
                 <a href="#"><span class="icon">🚪</span> Logout</a>
@@ -36,7 +34,7 @@
         <main class="content">
             <header>
                 <h2>Manage Accounts</h2>
-                <a href="#" class="back-link">Back to Dashboard</a>
+                <a href="../manager/dashboard.php" class="back-link">Back to Dashboard</a>
             </header>
             <section class="accounts">
                 <div class="section-header">
@@ -109,7 +107,7 @@
             </section>
             <section class="blacklisted">
                 <div class="section-header">
-                    <h3>Blacklisted</h3>
+                    <h3>Blacklisted Passengers</h3>
                     <button class="add-user">Add User</button>
                 </div>
                 <table>
