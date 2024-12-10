@@ -39,7 +39,7 @@
             <section class="accounts">
                 <div class="section-header">
                     <h3>Accounts</h3>
-                    <button class="add-user">Add User</button>
+                    <button class="add-user"><a href="../manager/addUser.php">Add User</a></button>
                 </div>
                 <table>
                     <thead>
@@ -108,7 +108,7 @@
             <section class="blacklisted">
                 <div class="section-header">
                     <h3>Blacklisted Passengers</h3>
-                    <button class="add-user">Add User</button>
+                    <button class="add-user"><a href="../manager/addBlacklisted.php">Add Blacklist</a></button>
                 </div>
                 <table>
                     <thead>
