@@ -1,4 +1,7 @@
-<?php include('../../control/includes/db.php');
+<!-- Frontend by: Jekka Hufalar
+     Backend by: Mark Jervin Galarce-->
+<?php 
+include('../../control/includes/db.php');
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
@@ -16,36 +19,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $result = $stmt->get_result();
   
   if ($result->num_rows > 0) {
-      $user = $result->fetch_assoc();
-      // Verify the password
-      if (password_verify($password, $user['password'])) {
-          // Password is correct, create session
-          $_SESSION['user_id'] = $user['user_id'];
-          $_SESSION['username'] = $user['username'];
-          $_SESSION['role'] = $user['role'];
-          $_SESSION['user_type'] = $user['user_type'];
-          
-          // Update user status to Online
-          $update_sql = "UPDATE users SET user_status = 'Online' WHERE user_id = ?";
-          $update_stmt = $conn->prepare($update_sql);
-          $update_stmt->bind_param("i", $user['user_id']);
-          $update_stmt->execute();
-          
-          // Redirect based on role
-          if ($user['role'] == 'Student') {
-              header("Location: ../../view/manager/route.php");
-          } else if ($user['role'] == 'Faculty') {
-              header("Location: ../../view/manager/account.php");
-          } else if ($user['role'] == 'Employee') {
+    $user = $result->fetch_assoc();
+    // Verify the password
+    if (password_verify($password, $user['password'])) {
+        // Password is correct, create session
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role'];
+        $_SESSION['user_type'] = $user['user_type'];
+
+        // Redirect based on role
+        if ($user['role'] == 'Student') {
+            header("Location: ../../view/passenger/booking.php");
+        } else if ($user['role'] == 'Faculty') {
             header("Location: ../../view/manager/dashboard.php");
-          }
-          exit();
-      } else {
-          $error = "Invalid password";
-      }
-  } else {
-      $error = "Username not found";
-  }
+        } else if ($user['role'] == 'Employee') {
+            header("Location: ../../view/manager/dashboard.php");
+        }
+        exit();
+    } else {
+        $error = "Invalid password";
+    }
+} else {
+    $error = "Username not found";
+}
+
   
   $stmt->close();
 }
@@ -89,7 +87,7 @@ $conn->close();
           <input type="password" id="password" name="password" placeholder="Enter a password" required>
         </div>
       <button type="submit" class="register-btn">Login</button>
-      <p class="login-text">Dont have an account? <a href="../passenger/index.php" id="show-login-form">Sign Up</a></p>
+      <p class="login-text">Dont have an account? <a href="../passenger/index.php" >Sign Up</a></p>
 
   </form>
 

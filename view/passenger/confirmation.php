@@ -1,6 +1,7 @@
+<!-- Frontend by: Jemma Niduaza
+     Backend by: Jemma Niduaza -->
 <?php
-require_once('includes/db.php');
-
+require_once('../../control/includes/db.php');
 // Capture ride_id from POST data
 $ride_id = $_POST['ride_id'] ?? '';
 
@@ -76,6 +77,7 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body id="confirm-bod">
+    <!-- Container for the booking details of the passenger -->
     <div class="confirm-cont">
         <h1>Booking Confirmed!</h1>
         <img src="assets/confirm.png" alt="Confirmation">

@@ -1,5 +1,8 @@
+<!-- Frontend by: Chryzel Beray, Mark Jervin Galarce
+     Backend by: Mark Jervin Galarce, Justine Lucas, and Jemma Niduaza -->
 <?php
-require_once('includes/db.php');
+// include('../../control/includes/db.php');
+require_once('../../control/includes/db.php');
 
 // Initialize filtered rides variable
 $rides = [];
@@ -109,7 +112,7 @@ $conn->close();
         <h1>GoGora</h1>
         <a href="#"><img src="assets/profile.png" alt="Profile"></a>
         <div class="logout-link">
-            <a href="includes/logout.php"><img src="assets/logout.png"></a>
+            <a href="includes/index.php"><img src="assets/logout.png"></a>
         </div>
     </header>
 

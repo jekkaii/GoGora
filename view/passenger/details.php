@@ -1,5 +1,7 @@
+<!-- Frontend by: Mark Jervin Galarce, Chryzel Beray, and Justine Luicas 
+     Backend by: Jemma Niduaza and Justine Lucas -->
 <?php
-require_once('includes/db.php');
+require_once('../../control/includes/db.php');
 
 // Get the ride_id from the POST data
 if (isset($_POST['ride_id'])) {
@@ -56,6 +58,7 @@ $conn->close();
     <link rel="stylesheet" href="styles.css">
 </head>
 <body id="details-bod">
+    <!-- Container of the available rides the passenger can book -->
     <div class="details-cont">
         <h1>Review Your Ride Details</h1>
         <div class="ride-details">

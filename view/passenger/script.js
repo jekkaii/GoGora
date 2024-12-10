@@ -38,16 +38,13 @@ document.getElementById('registration-form').addEventListener('submit', function
         .then(data => {
             if (data.success) {
                 if (confirm(data.message)) {
-                    window.location.href = 'index.php';
+                    window.location.href = 'manage.php';
                 }
             } else {
                 confirm(data.message);
             }
         })
-        .catch(error => {
-            console.error('Error:', error);
-            confirm('Registration failed. Please try again.');
-        });
+      
 });
 
 // Handle login form submission
