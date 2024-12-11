@@ -39,7 +39,7 @@
                <section class="accounts">
                    <div class="section-header">
                        <h3>Routes</h3>
-                       <button class="add-user"><a href="../manager/addRide.php">Add Route</a></button>
+                       <button class="add-user"><a href="../manager/addRoute.php">Add Route</a></button>
                    </div>
                    <table>
                        <thead>
