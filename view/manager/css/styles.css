@@ -263,3 +263,28 @@ select {
     border: 1px solid white;
     color: white;
 }
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.dashboard-stat {
+    background-color: var(--white);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-stat h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.dashboard-stat p {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
