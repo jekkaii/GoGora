@@ -39,7 +39,6 @@
                <section class="accounts">
                    <div class="section-header">
                        <h3>Routes</h3>
-                       <button class="add-user"><a href="../manager/addRoute.php">Add Route</a></button>
                    </div>
                    <table>
                        <thead>
@@ -62,7 +61,7 @@
                                <td>10:00 am to 11:00 am</td>
                                <td>22</td>
                                <td>
-                                   <button class="action-btn edit">✏️</button>
+                                   <button class="action-btn edit"><a href="../manager/updateRoute.php">✏️</a></button>
                                    <button class="action-btn delete">🗑️</button>
                                </td>
                            </tr>

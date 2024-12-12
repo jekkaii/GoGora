@@ -69,7 +69,7 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="schedule_time">Schedule Time</label>
+                        <label for="schedule_time">Pickup Time</label>
                         <select id="schedule_time" name="schedule_time" required>
                             <option value="">Select Time</option>
                             <?php
@@ -83,7 +83,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="arrival_time">Arrival Time</label>
+                        <label for="arrival_time">Departure Time</label>
                         <select id="arrival_time" name="arrival_time" required>
                             <option value="">Select Time</option>
                             <?php
@@ -99,7 +99,7 @@
                 </div>
 
                 <div class="button-group">
-                    <button type="submit" class="btn btn-update">UPDATE</button>
+                    <button type="submit" class="btn btn-add">ADD</button>
                     <button type="button" class="btn btn-back" onclick="history.back()">BACK</button>
                 </div>
             </form>

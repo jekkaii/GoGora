@@ -34,7 +34,7 @@
            <!-- MAIN CONTENT HERE -->
            <div class="main-content">
             <form class="update-form" method="POST" action="process-update.php">
-                <h2 class="form-title">ADD A ROUTE</h2>
+                <h2 class="form-title">UPDATE ROUTE</h2>
                 
                 <div class="form-group">
                     <label for="place_number">Plate Number</label>
