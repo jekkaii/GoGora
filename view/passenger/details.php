@@ -1,45 +1,44 @@
-<!-- Frontend by: Mark Jervin Galarce, Chryzel Beray, and Justine Luicas 
-     Backend by: Jemma Niduaza and Justine Lucas -->
 <?php
 require_once('../../control/includes/db.php');
 
-// Get the ride_id from the POST data
-if (isset($_POST['ride_id'])) {
-    $ride_id = $_POST['ride_id'];
+// Debug: Check if ride_id is sent
+if (!isset($_POST['ride_id'])) {
+    echo "No ride selected.";
+    exit();
+}
 
-    // Fetch ride details along with reservation details
-    $query = "SELECT r.*, res.total_fare, res.payment_method, res.payment_status, res.status 
-              FROM rides r 
-              JOIN reservations res ON r.ride_id = res.ride_id 
-              WHERE r.ride_id = ?";
-    $stmt = $conn->prepare($query);
-    if (!$stmt) {
-        error_log("SQL prepare failed: " . $conn->error);
-        echo "Sorry, something went wrong. Please try again later.";
-        exit();
-    }
+$ride_id = $_POST['ride_id'];
 
-    $stmt->bind_param('i', $ride_id);
-    $stmt->execute();
-    $ride_details = $stmt->get_result()->fetch_assoc();
+// Fetch ride details along with reservation details using LEFT JOIN
+$query = "SELECT r.*, res.total_fare, res.payment_method, res.payment_status, res.status 
+          FROM rides r 
+          LEFT JOIN reservations res ON r.ride_id = res.ride_id 
+          WHERE r.ride_id = ?";
+$stmt = $conn->prepare($query);
+
+if (!$stmt) {
+    echo "Database error: " . $conn->error;
+    exit();
+}
+
+$stmt->bind_param('i', $ride_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result && $result->num_rows > 0) {
+    $ride_details = $result->fetch_assoc();
 
     // Extract details to variables
-    if ($ride_details) {
-        $route = $ride_details['route'];
-        $time = $ride_details['time'];
-        $plate_number = $ride_details['plate_number'];
-        $total_fare = $ride_details['total_fare'];
-        $capacity = $ride_details['capacity'];
-        $payment_method = $ride_details['payment_method'];
-        $payment_status = $ride_details['payment_status'];
-        $departure = $ride_details['departure'];  // Fetching departure from rides table
-        $status = $ride_details['status']; // Fetching status from reservations table
-    } else {
-        echo "No ride found with the selected ID.";
-        exit();
-    }
+    $route = $ride_details['route'];
+    $departure = $ride_details['departure'];
+    $plate_number = $ride_details['plate_number'];
+    $capacity = $ride_details['capacity'];
+    $total_fare = $ride_details['total_fare'] ?? 'N/A';
+    $payment_method = $ride_details['payment_method'] ?? 'N/A';
+    $payment_status = $ride_details['payment_status'] ?? 'N/A';
+    $status = $ride_details['status'] ?? 'N/A';
 } else {
-    echo "No ride selected.";
+    echo "No ride found with the selected ID.";
     exit();
 }
 
@@ -47,18 +46,15 @@ $stmt->close();
 $conn->close();
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Details</title>
-    <link rel="icon" type="image/png" href="assets/favicon.png"> 
     <link rel="stylesheet" href="styles.css">
 </head>
 <body id="details-bod">
-    <!-- Container of the available rides the passenger can book -->
     <div class="details-cont">
         <h1>Review Your Ride Details</h1>
         <div class="ride-details">
@@ -75,24 +71,8 @@ $conn->close();
                 <span class="value"><?= htmlspecialchars($capacity); ?></span>
             </div>
             <div class="detail-item">
-                <span class="label">Status:</span> 
-                <span class="value"><?= htmlspecialchars($status); ?></span>
-            </div>
-            <div class="detail-item">
                 <span class="label">Route:</span> 
                 <span class="value"><?= htmlspecialchars($route); ?></span>
-            </div>
-            <div class="detail-item">
-                <span class="label">Total Fare:</span> 
-                <span class="value">₱<?= htmlspecialchars($total_fare); ?></span>
-            </div>
-            <div class="detail-item">
-                <span class="label">Payment Method:</span> 
-                <span class="value"><?= htmlspecialchars($payment_method); ?></span>
-            </div>
-            <div class="detail-item">
-                <span class="label">Payment Status:</span> 
-                <span class="value"><?= htmlspecialchars($payment_status); ?></span>
             </div>
 
             <div class="button-section">

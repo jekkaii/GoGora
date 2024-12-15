@@ -1,75 +1,45 @@
-<!-- Backend of booking.php
-    by: Jekka Hufalar -->
 <?php
-require_once('../../control/includes/db.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/GoGora/control/includes/db.php');
 header('Content-Type: application/json');
 
+// Initialize an empty array for rides
 $rides = [];
 
-// Check if the request is AJAX
+// Check if the request is valid
 $isAjax = !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && $isAjax) {
-    if (!isset($_POST['route'], $_POST['ride_type'], $_POST['time'])) {
-        echo json_encode(["error" => "Invalid input"]);
+if ($_SERVER["REQUEST_METHOD"] === "POST" && $isAjax) {
+    // Query to get rides with formatted time
+    $query = "
+        SELECT ride_id, route, TIME_FORMAT(time, '%h:%i %p') AS formatted_time, 
+               seats_available, ride_type 
+        FROM rides 
+        WHERE seats_available > 0
+    ";
+
+    $stmt = $conn->prepare($query);
+
+    if ($stmt) {
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        while ($row = $result->fetch_assoc()) {
+            $rides[] = [
+                'ride_id' => $row['ride_id'],
+                'route' => $row['route'],
+                'time' => $row['formatted_time'], // Formatted time in 12-hour format
+                'seats_available' => $row['seats_available'],
+                'ride_type' => $row['ride_type']
+            ];
+        }
+        $stmt->close();
+    } else {
+        echo json_encode(["error" => "Failed to prepare SQL statement"]);
         exit;
     }
-
-    $route = $_POST['route'];
-    $ride_type = $_POST['ride_type'];
-    $time = $_POST['time'];
-
-    // Base query
-    $query = "SELECT * FROM rides WHERE 1";
-    $params = [];
-    $types = '';
-
-    // Route filter
-    if (!empty($route)) {
-        if (stripos($route, 'bakakeng') !== false && stripos($route, 'igorot') === false) {
-            $query .= " AND LOWER(route) LIKE LOWER(?)";
-            $params[] = '%bakakeng to igorot park%';
-        } elseif (stripos($route, 'igorot') !== false && stripos($route, 'bakakeng') === false) {
-            $query .= " AND LOWER(route) LIKE LOWER(?)";
-            $params[] = '%igorot park to bakakeng%';
-        } else {
-            $query .= " AND LOWER(route) LIKE LOWER(?)";
-            $params[] = '%' . $route . '%';
-        }
-        $types .= 's';
-    }
-
-    // Ride type filter
-    if ($ride_type !== 'All') {
-        $query .= " AND ride_type = ?";
-        $params[] = $ride_type;
-        $types .= 's';
-    }
-
-    // Time filter
-    if ($time !== 'All') {
-        $start_time = date('H:i:s', strtotime($time));
-        $end_time = date('H:i:s', strtotime('+59 minutes 59 seconds', strtotime($start_time)));
-        $query .= " AND TIME(time) BETWEEN ? AND ?";
-        $params[] = $start_time;
-        $params[] = $end_time;
-        $types .= 'ss';
-    }
-
-    // Execute query
-    $stmt = $conn->prepare($query);
-    if (!empty($params)) {
-        $stmt->bind_param($types, ...$params);
-    }
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result && $result->num_rows > 0) {
-        $rides = $result->fetch_all(MYSQLI_ASSOC);
-    }
-
-    $stmt->close();
 }
 
+// Return JSON response
 echo json_encode($rides);
 $conn->close();
+?>
