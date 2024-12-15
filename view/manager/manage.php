@@ -1,6 +1,6 @@
 <!-- Frontend by: Jekka Hufalar
      Backend by: Mark Jervin Galarce-->
-<?php 
+     <?php 
 include('../../control/includes/db.php');
 
 if ($conn->connect_error) {
@@ -33,8 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../../view/passenger/booking.php");
         } else if ($user['role'] == 'Faculty') {
             header("Location: ../../view/manager/dashboard.php");
-        } else if ($user['role'] == 'Employee') {
-            header("Location: ../../view/manager/dashboard.php");
+        } else if ($user['role'] == 'Admin') {
+            header("Location: ../../view/admin/.php");
         }
         exit();
     } else {

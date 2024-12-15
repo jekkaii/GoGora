@@ -79,11 +79,11 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="destination_to">Destination To</label>
+                        <label for="destination_to">Going To:</label>
                         <input type="text" id="destination_to" name="destination_to" maxlength="45" required>
                     </div>
                     <div class="form-group">
-                        <label for="destination_from">Destination From</label>
+                        <label for="destination_from">From:</label>
                         <input type="text" id="destination_from" name="destination_from" maxlength="45" required>
                     </div>
                 </div>

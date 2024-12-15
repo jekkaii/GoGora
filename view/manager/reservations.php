@@ -53,11 +53,11 @@
                        </thead>
                        <tbody>
                            <tr>
-                               <td>301</td>
-                               <td>Bakakeng to Igorot Park</td>
-                               <td>2024-11-25 08:00 AM</td>
-                               <td>Active</td>
-                               <td>Paid</td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
                                <td>
                                    <button class="action-btn edit">✏️</button>
                                </td>
@@ -81,10 +81,10 @@
                        </thead>
                        <tbody>
                            <tr>
-                               <td>201</td>
-                               <td>Bakakeng to Igorot Park</td>
-                               <td>2024-11-25 08:00 AM</td>
-                               <td>5</td>
+                               <td</td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
                                <td>
                                    <button class="action-btn edit">✏️</button>
                                </td>
