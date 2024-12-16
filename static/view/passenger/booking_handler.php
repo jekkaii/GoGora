@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'] . '/GoGora/control/includes/db.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/control/includes/db.php');
 header('Content-Type: application/json');
 
 // Initialize an empty array for rides

@@ -15,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Set default values
     $reservation_time = date('Y-m-d H:i:s');
     $status = 'Active';
-    $payment_status = NULL;
-    $total_fare = NULL;
-    $payment_method = NULL;
+    $payment_status = 'Not Paid';
+    $total_fare = 15;
+    $payment_method = 'Cash';
 
     // Insert reservation into database
     $query = "

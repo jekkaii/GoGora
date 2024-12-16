@@ -1,18 +1,30 @@
 // Author: Justine Lucas
+// routes/blacklist.js
 const express = require('express');
 const router = express.Router();
+const db = require('../db'); // Assuming your database connection
 
-// Example Blacklist Routes
-router.get('/', (req, res) => {
-    res.json({ message: 'Fetching blacklist requests' });
+// Get all blacklisted users
+router.get('/', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM blacklist');
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch blacklist data' });
+  }
 });
 
-router.post('/', (req, res) => {
-    res.json({ message: 'Adding to blacklist' });
-});
+// Approve or reject blacklisting
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body; // status can be 'approved' or 'rejected'
 
-router.delete('/:id', (req, res) => {
-    res.json({ message: `Removing from blacklist with ID ${req.params.id}` });
+  try {
+    const result = await db.query('UPDATE blacklist SET blacklist_status = $1 WHERE blacklist_id = $2', [status, id]);
+    res.json({ message: 'Blacklist status updated' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to update blacklist status' });
+  }
 });
 
 module.exports = router;

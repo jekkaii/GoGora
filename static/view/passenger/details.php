@@ -1,5 +1,5 @@
 <?php
-require_once('../../control/db.php');
+require_once('../../control/includes/db.php');
 // Get the ride_id from the POST data
 if (isset($_POST['ride_id'])) {
     $ride_id = $_POST['ride_id'];
