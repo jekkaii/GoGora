@@ -1,5 +1,4 @@
 /* AUTHOR: Justine Lucas */
-
 /* General styles for body and html */
 body, html {
     height: 100%;
@@ -40,7 +39,7 @@ body, html {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 /* Logo positioning */
@@ -54,9 +53,9 @@ body, html {
     font-size: 70px; /* Larger font size for emphasis */
     font-weight: bold; /* Make the text bold */
     color: #fff; /* Base color */
-    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.5); /* Glow effect */
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0); /* Glow effect */
     letter-spacing: 8px; /* Increase spacing between letters */
-    background: linear-gradient(135deg, #0077ff, #cec70d, #ffffff);
+    background: linear-gradient(90deg, #0077ff, #cec70d, #ffffff);
     -webkit-background-clip: text; /* Clip the background to the text */
     -webkit-text-fill-color: transparent; /* Make the text background visible */
     margin-bottom: 20px;

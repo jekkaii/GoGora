@@ -37,7 +37,7 @@ func main() {
 
 	// Start the Server
 	fmt.Println("Starting server at http://Gogora")
-	if err := http.ListenAndServe("192.168.68.126:8080", nil); err != nil {
+	if err := http.ListenAndServe("10.135.137.51:8080", nil); err != nil {
 		log.Fatal(err)
 	}
 }
